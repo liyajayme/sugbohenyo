@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-deep: #0d1117;
+    --gold: #e8a020;
+    --gold-light: #f5c050;
+    --gold-glow: rgba(232, 160, 32, 0.35);
+    --coral: #e06030;
+    --teal: #30c8b0;
+    --white: #f0ede8;
+    --muted: rgba(240, 237, 232, 0.55);
+    --card-bg: rgba(17, 28, 42, 0.82);
+    --input-bg: rgba(8, 18, 30, 0.75);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-border-focus: rgba(232, 160, 32, 0.55);
+    --error: #e05050;
+}
+
+html,
+body {
+    min-height: 100%;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
+    background-color: var(--bg-deep);
+    color: var(--white);
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.box {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.75rem 2.5rem 2.25rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 0 0 1px rgba(232, 160, 32, 0.06),
+                0 24px 64px rgba(0, 0, 0, 0.55);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.box-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.box-top img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(232, 160, 32, 0.4));
+}
+
+.box-top h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.box-top h1 span {
+    background: linear-gradient(90deg, var(--gold), var(--coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.box-top p {
+    font-size: 0.85rem;
+    color: white;
+    font-style: italic;
+}
+
+#login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+#login-form label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-box i {
+    position: absolute;
+    left: 0.9rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    pointer-events: none;
+}
+
+.input-box input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    padding: 0.72rem 1rem 0.72rem 2.5rem;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-box input::placeholder {
+    color: rgba(240, 237, 232, 0.28);
+}
+
+.input-box input:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: 0 0 0 3px rgba(232, 160, 32, 0.1);
+}
+
+#login-form button[type="submit"] {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, var(--coral), var(--gold), var(--gold-light));
+    background-size: 200% 100%;
+    background-position: left;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 24px var(--gold-glow);
+    transition: background-position 0.4s ease, transform 0.2s;
+}
+
+#login-form button[type="submit"]:hover {
+    background-position: right;
+    transform: translateY(-2px);
+}
+
+.box-bottom p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+.box-bottom a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.box-bottom a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

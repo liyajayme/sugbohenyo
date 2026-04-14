@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugbo Henyo — Create Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+    <main class="signup-wrapper">
+        <div class="box">
+
+            <div class="box-top">
+                <img src="images/logo.png" alt="logo">
+                <h1>Sugbo<span>Henyo</span></h1>
+                <p>Create your account and start exploring</p>
+            </div>
+
+            <div class="box-middle">
+                <form id="signup-form" novalidate>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" id="firstname" placeholder="Juan">
+                            </div>
+                            <span class="error-msg" id="err-firstname"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <div class="input-box">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" id="lastname" placeholder="dela Cruz">
+                            </div>
+                            <span class="error-msg" id="err-lastname"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-at"></i>
+                            <input type="text" id="username" placeholder="Choose a username">
+                        </div>
+                        <span class="error-msg" id="err-username"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="email" placeholder="juan@email.com">
+                        </div>
+                        <span class="error-msg" id="err-email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="Create a password">
+                        </div>
+                        <span class="error-msg" id="err-password"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirm-password" placeholder="Re-enter your password">
+                        </div>
+                        <span class="error-msg" id="err-confirm"></span>
+                    </div>
+
+                    <div class="strength-wrap" id="strength-wrap">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                        <span class="strength-label" id="strength-label"></span>
+                    </div>
+
+                    <button type="submit" class="btn-signup">Create My Account</button>
+
+                </form>
+            </div>
+
+            <div class="box-bottom">
+                <p>Already have an account? <a href="login.html">Log in here</a></p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+</body>
+
+</html>
