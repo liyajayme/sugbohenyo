@@ -64,12 +64,13 @@ body {
     background-clip: text;
 }
 
-.title {
+.title{
     font-size: 1.3rem;
     font-weight: 800;
     letter-spacing: -0.01em;
     line-height: 1.2;
     margin-bottom: 0.25rem;
+    color: var(--white);
 }
 
 .top-nav p {
