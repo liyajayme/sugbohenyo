@@ -308,6 +308,6 @@ const AuthDB = (() => {
             return;
         }
 
-        window.location.href = 'dashaboard.html';
+        window.location.href = 'dashboard.html';
     });
 })();
