@@ -10,7 +10,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text);
-    background: url("/images/sunrise.gif") center/cover no-repeat;
+    background: url("images/bg.png") center/cover no-repeat;
     margin: 0;
     padding: 0;
 }
