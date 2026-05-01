@@ -1,349 +1,190 @@
-.main {
-    position: relative;
-    z-index: 1;
-    margin-left: 240px;
-    min-height: 100vh;
-    padding: 2.5rem 2.5rem 4rem;
-    background: var(--bg-deep);
-    display: flex;
-    flex-direction: column;
-    gap: 2.25rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#sidebar {
+body {
+    min-height: 100vh;
+    display: flex;
+    background-image: url("images/dashboard.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    font-family: 'Press Start 2P', system-ui;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 0;
+}
+
+#sidebar, .main {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+}
+
+.main {
+    flex: 1;
+    margin-left: 240px;
+    padding: 20px;
+    color: white;
 }
 
 .header {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 1rem;
-    animation: fadeUp 0.5s ease both;
-}
-
-.greeting {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 0.15rem;
-}
-
-.username {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.9rem;
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -0.01em;
-}
-
-.xp {
-    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.45rem 1rem;
-    background: rgba(232, 160, 32, 0.1);
-    border: 1px solid rgba(232, 160, 32, 0.25);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--gold-light);
-}
-
-.xp-pill i {
-    color: var(--gold);
-    font-size: 0.8rem;
+    padding: 18px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
 }
 
 .section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    animation: fadeUp 0.5s ease 0.1s both;
+    margin-bottom: 25px;
 }
 
 .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.section-title i {
-    color: var(--gold);
-    font-size: 0.95rem;
+    margin: 10px 0;
+    font-size: 12px;
+    color: white;
 }
 
 .profile-card {
-    background: rgba(17, 28, 42, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
-    padding: 1.75rem;
     display: flex;
+    gap: 20px;
     align-items: center;
-    gap: 1.75rem;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(12px);
-    flex-wrap: wrap;
-}
-
-.profile-avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 2px solid rgba(232, 160, 32, 0.4);
-    overflow: hidden;
-    flex-shrink: 0;
-    background: rgba(8, 18, 30, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
 }
 
 .profile-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.avatar-fallback {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 1.75rem;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    flex: 1;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
 }
 
 .profile-info h4 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--white);
+    font-size: 12px;
+    margin-bottom: 6px;
 }
 
-.profile-rank {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.78rem;
-    color: var(--gold);
-    font-weight: 500;
-    background: rgba(232, 160, 32, 0.1);
-    padding: 0.25rem 0.65rem;
-    border-radius: 50px;
-    border: 1px solid rgba(232, 160, 32, 0.2);
-    width: fit-content;
-}
-
-.profile-joined {
-    font-size: 0.78rem;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
+.profile-info p,
+.profile-info span {
+    font-size: 9px;
 }
 
 .profile-stats {
     display: flex;
-    gap: 1.5rem;
+    gap: 15px;
     margin-left: auto;
 }
 
 .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
 }
 
 .stat-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1;
+    font-size: 10px;
 }
 
 .stat-label {
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 7px;
 }
 
 .progress-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
 }
 
 .progress-card {
-    background: rgba(17, 28, 42, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 14px;
-    padding: 1.25rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    backdrop-filter: blur(12px);
-    transition: border-color 0.2s;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
 }
 
-.progress-card:hover {
-    border-color: rgba(232, 160, 32, 0.2);
-}
-
-.progress-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.progress-label {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--white);
-}
-
+.progress-label,
 .progress-percent {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--teal);
+    font-size: 10px;
 }
 
-.progress-percent.gold {
-    color: var(--gold);
-}
-
-.progress-percent.coral {
-    color: var(--coral);
-}
-
-.progress-percent.teal {
-    color: var(--teal);
+.progress-sub {
+    font-size: 8px;
+    margin-top: 6px;
 }
 
 .progress-bar-wrap {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 99px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
     overflow: hidden;
+    margin: 10px 0;
 }
 
 .progress-bar {
     height: 100%;
     width: var(--pct);
-    background: var(--teal);
-    border-radius: 99px;
-    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    background: gold;
+    border-radius: 10px;
 }
-
-.progress-bar.gold {
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-}
-
-.progress-bar.coral {
-    background: var(--coral);
-}
-
-.progress-bar.teal {
-    background: var(--teal);
-}
-
-.progress-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-}
-
 
 .badges-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
 }
 
 .badge-card {
-    background: rgba(17, 28, 42, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 14px;
-    padding: 1.4rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    padding: 15px;
     text-align: center;
-    backdrop-filter: blur(12px);
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-
-.badge-card.earned {
-    border-color: rgba(232, 160, 32, 0.2);
-}
-
-.badge-card.earned:hover {
-    transform: translateY(-3px);
-    border-color: rgba(232, 160, 32, 0.45);
-    box-shadow: 0 8px 24px rgba(232, 160, 32, 0.12);
-}
-
-.badge-card.locked {
-    opacity: 0.45;
-    filter: grayscale(1);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
 }
 
 .badge-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-}
-
-.badge-card.earned .badge-icon {
-    background: rgba(232, 160, 32, 0.12);
-    color: var(--gold);
-    border: 1px solid rgba(232, 160, 32, 0.25);
-}
-
-.badge-card.locked .badge-icon {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--muted);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .badge-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--white);
+    font-size: 9px;
+    display: block;
+    margin-bottom: 6px;
 }
 
 .badge-desc {
-    font-size: 0.72rem;
-    color: var(--muted);
-    line-height: 1.4;
+    font-size: 7px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+.badge-card.locked {
+    opacity: 0.4;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+h1, h2, h3, h4, p, span {
+    color: white;
 }
