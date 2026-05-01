@@ -8,9 +8,9 @@ class StoryScene extends Phaser.Scene {
         this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');   
         this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
         this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/sky_bg.png');
-        this.load.image('tree', 'assets/trees.png');
-        this.load.image('grass', 'assets/grass.png');
+        this.load.image('bg', 'assets/pre-colonial/sky_bg.png');
+        this.load.image('tree', 'assets/pre-colonial/trees.png');
+        this.load.image('grass', 'assets/pre-colonial/grass.png');
     }
 
     create() {
@@ -64,7 +64,7 @@ class StoryScene extends Phaser.Scene {
         this.isTyping = true;
         this.current = this.dialogues[this.index];
 
-        this.time.addEvent({
+        this.typingEvent = this.time.addEvent({
             delay: this.typingSpeed,
             loop: true,
             callback: () => {
@@ -109,21 +109,68 @@ class MainScene extends Phaser.Scene {
         this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');
         this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
         this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/sky_bg.png');
-        this.load.image('tree', 'assets/trees.png');
-        this.load.image('grass', 'assets/grass.png');
-        this.load.image('xs_log', 'assets/xs_log.png');
-        this.load.image('s_log', 'assets/s_log.png');
-        this.load.image('med_log', 'assets/med_log.png');
-        this.load.image('l_log', 'assets/l_log.png');
-        this.load.image('stack_log', 'assets/stack_log.png');
-        this.load.image('kubo', 'assets/bahaykubo.png');
-        this.load.image('spice', 'assets/spice.png');
-        this.load.image('gold', 'assets/gold.png');
-        this.load.image('honey', 'assets/honey.png');
-        this.load.image('pearl', 'assets/pearl.png');
+        this.load.image('bg', 'assets/pre-colonial/sky_bg.png');
+        this.load.image('tree', 'assets/pre-colonial/trees.png');
+        this.load.image('grass', 'assets/pre-colonial/grass.png');
+        this.load.image('xs_log', 'assets/logs/xs_log.png');
+        this.load.image('s_log', 'assets/logs/s_log.png');
+        this.load.image('med_log', 'assets/logs/med_log.png');
+        this.load.image('l_log', 'assets/logs/l_log.png');
+        this.load.image('kubo', 'assets/pre-colonial/bahaykubo.png');
+        this.load.image('spice', 'assets/pre-colonial/spice.png');
+        this.load.image('gold', 'assets/pre-colonial/gold.png');
+        this.load.image('honey', 'assets/pre-colonial/honey.png');
+        this.load.image('pearl', 'assets/pre-colonial/pearl.png');
         this.load.image('enemy_walk1', 'assets/soldier/left_enemy.png');
         this.load.image('enemy_walk2', 'assets/soldier/right_enemy.png');
+    }
+
+    showDialogue() {
+        this.dialogText.setText('');
+        this.charIndex = 0;
+        this.isTyping = true;
+
+        this.currentLine = this.dialogues[this.dialogIndex];
+
+        this.typingEvent = this.time.addEvent({
+            delay: 30,
+            loop: true,
+            callback: () => {
+                this.dialogText.text += this.currentLine[this.charIndex];
+                this.charIndex++;
+
+                if (this.charIndex >= this.currentLine.length) {
+                    this.isTyping = false;
+                    this.time.removeAllEvents();
+                }
+            }
+        });
+    }
+
+    nextDialogue() {
+        if (!this.gameStarted) {
+            if (this.isTyping) {
+                this.dialogText.setText(this.currentLine);
+                this.isTyping = false;
+                this.time.removeAllEvents();
+                return;
+            }
+
+            this.dialogIndex++;
+
+            if (this.dialogIndex >= this.dialogues.length) {
+                this.dialogBox.setVisible(false);
+                this.dialogText.setVisible(false);
+                this.hintText.setVisible(false);
+
+                this.input.keyboard.enabled = true;
+
+                this.physics.resume(); // resume physics
+                this.gameStarted = true;
+            } else {
+                this.showDialogue();
+            }
+        }
     }
 
     enterHouse(player, zone) {
@@ -148,7 +195,8 @@ class MainScene extends Phaser.Scene {
         });
 
         this.cameras.main.once('camerafadeoutcomplete', () => { // (event, callback)
-            this.scene.start('EndScene'); 
+            this.scene.stop(); // stop MainScene
+            this.scene.start('EndScene');
         });
     }
 
@@ -183,7 +231,6 @@ class MainScene extends Phaser.Scene {
     hitEnemy(player, enemy) {
         this.cameras.main.shake(100, 0.01);
 
-        // prevent rapid multiple hits (IMPORTANT)
         if (this.hitCooldown) return;
         this.hitCooldown = true;
 
@@ -196,7 +243,7 @@ class MainScene extends Phaser.Scene {
 
         this.livesText.setText('Lives: ' + this.lives);
 
-        // optional: also reduce score
+        // reduce score
         this.score = Math.max(0, this.score - 20);
         this.scoreText.setText('Score: ' + this.score);
 
@@ -207,17 +254,22 @@ class MainScene extends Phaser.Scene {
             player.setVelocityX(200);
         }
 
-        // 💀 GAME OVER
+        // GAME OVER
         if (this.lives <= 0) {
+             this.scene.stop(); // stop MainScene itself
             this.scene.start('GameOverScene');
         }
     }
 
     create() {
+        this.physics.resume();
+        this.input.keyboard.enabled = true;
         this.score = 0;
         this.lives = 3;
         this.hitCooldown = false;
         this.entering = false;
+        this.gameStarted = false;
+        
         
         const platformData = [ // array of objects that define the position, key, and size of each platform in the level
 
@@ -278,7 +330,7 @@ class MainScene extends Phaser.Scene {
             tile.refreshBody();
         }
 
-        this.scoreText = this.add.text(30, 100, 'Use ->, <- to move', {
+        this.instrucText = this.add.text(30, 100, 'Use ->, <- to move', {
             fontSize: '16px',
             fill: '#000000'
         })
@@ -326,13 +378,17 @@ class MainScene extends Phaser.Scene {
 
         this.enemies = this.physics.add.group();
 
-        let enemy = this.enemies.create(900, 200, 'enemy_walk1');
-        enemy.setScale(0.1);
-        enemy.setVelocityX(-90);
-        enemy.minX = 950;
-        enemy.maxX = 1030;
+        let enemy1 = this.enemies.create(600, 200, 'enemy_walk1');
+        enemy1.setScale(0.1);
+        enemy1.setVelocityX(-90);
 
-        this.player = this.physics.add.sprite(20, 80, 'rajahH_idle'); //(x, y, key)
+        let enemy2 = this.enemies.create(900, 200, 'enemy_walk1');
+        enemy2.setScale(0.1);
+        enemy2.setVelocityX(-90);
+        enemy2.minX = 950;
+        enemy2.maxX = 1030;
+
+        this.player = this.physics.add.sprite(20, 130, 'rajahH_idle'); //(x, y, key)
         this.player.setScale(.09);
         this.player.setCollideWorldBounds(true);
 
@@ -358,6 +414,36 @@ class MainScene extends Phaser.Scene {
             this
         );
 
+        this.dialogues = [
+            "Rajah Humabon: I need to collect spices, gold, honey, and pearls to trade with the Chinese merchants...",
+            "Rajah Humabon: But the path is dangerous, with treacherous logs and lurking enemies...",
+            "Rajah Humabon: I must be careful and gather all the items!"
+        ];
+
+        this.dialogIndex = 0;
+        this.charIndex = 0;
+        this.isTyping = false;
+
+        this.dialogBox = this.add.rectangle(256, 240, 500, 80, 0xffffff)
+            .setStrokeStyle(2, 0x000000) // border
+            .setScrollFactor(0);
+        this.dialogText = this.add.text(20, 210, '', {
+            fontSize: '16px',
+            fill: '#000',
+            wordWrap: { width: 470 }
+        }).setScrollFactor(0);
+
+        this.hintText = this.add.text(20, 260, 'SPACE to continue', {
+            fontSize: '12px',
+            fill: '#000'
+        }).setScrollFactor(0);
+
+        this.input.keyboard.on('keydown-SPACE', () => this.nextDialogue());
+        this.input.keyboard.on('keydown-RIGHT', () => this.nextDialogue());
+        this.input.on('pointerdown', () => this.nextDialogue());
+
+        this.showDialogue();
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.walkFrames = ['rajahH_idle', 'rajahH_walk'];
@@ -382,6 +468,12 @@ class MainScene extends Phaser.Scene {
     }
 
     update() {
+        if (!this.gameStarted && !this.physics.world.isPaused) {
+            if (this.player.body.blocked.down) {
+                this.physics.pause(); // pause ONLY when grounded
+            }
+        }
+
         this.enemies.children.iterate((enemy) => {
             if (!enemy) return;
 
@@ -503,7 +595,9 @@ class GameOverScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.input.keyboard.once('keydown-SPACE', () => {
-            this.scene.stop('MainScene');  
+            this.scene.stop('MainScene');
+            this.scene.stop('StoryScene');
+
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
@@ -520,7 +614,7 @@ class EndScene extends Phaser.Scene {
     create() {
         this.cameras.main.fadeIn(800, 0, 0, 0);
 
-        this.add.text(256, 120, "Level 1 Complete", {
+        this.add.text(256, 120, "Pre-Colonial Era Complete", {
             fontSize: '32px',
             fill: '#ffffff'
         }).setOrigin(0.5);
@@ -541,7 +635,9 @@ class EndScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.input.keyboard.once('keydown-SPACE', () => {
-            this.scene.stop('MainScene');  
+            this.scene.stop('MainScene');
+            this.scene.stop('StoryScene');
+
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
