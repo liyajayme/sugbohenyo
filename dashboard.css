@@ -7,10 +7,7 @@
 body {
     min-height: 100vh;
     display: flex;
-    background-image: url("images/sunrise.gif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/sunrise.gif') center/cover no-repeat;
     overflow-x: hidden;
     font-family: 'Press Start 2P', system-ui;
 }
@@ -21,6 +18,10 @@ body::before {
     inset: 0;
     background: rgba(0, 0, 0, 0.2);
     z-index: 0;
+}
+
+.profile-rank i {
+    margin-right: 7px;
 }
 
 #username {
@@ -77,27 +78,39 @@ body::before {
     box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
 }
 
+.profile-joined {
+    margin-top: 5px;
+}
+
 .profile-avatar {
     width: 80px;
     height: 80px;
     flex-shrink: 0;
     position: relative;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .profile-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    display: block;
 }
 
 .avatar-fallback {
-    width: 100%;
-    height: 100%;
-    display: flex;
+    position: absolute;
+    inset: 0;
+    display: none;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: gold;
+    font-size: 28px;
+}
+
+.avatar-fallback i {
+    color: orange;
 }
 
 .profile-info h4 {
@@ -169,7 +182,7 @@ body::before {
 .progress-bar {
     height: 100%;
     width: var(--pct);
-    background: gold;
+    background: orange;
     border-radius: 10px;
 }
 
