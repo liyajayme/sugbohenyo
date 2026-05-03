@@ -99,11 +99,15 @@ body {
   font-family: inherit;
   font-size: 25px;
   font-weight: bold;
-  color: #3a1a00;
   margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 2px solid rgba(0,0,0,0.15);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
   line-height: 1.4;
+  background: linear-gradient(90deg, rgb(255, 128, 0), #ffb300);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 #muni-list {
@@ -130,7 +134,7 @@ body {
   padding: 6px 10px;
   font-family: inherit;
   font-size: 20px;
-  color: #3a1a00;
+  color: #ea9c5d;
   text-decoration: none;
   border-radius: 6px;
   transition: background 0.15s, padding-left 0.15s;

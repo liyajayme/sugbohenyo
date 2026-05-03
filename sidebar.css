@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 2px solid rgba(255, 200, 0, 0.6);
+    border-right: 1px solid rgb(255, 128, 0);
     /* change nya */
     padding: 20px 8px;
     z-index: 1000;
@@ -45,7 +45,7 @@ body {
 }
 
 .henyo {
-    background: linear-gradient(90deg, gold, #fff3b0);
+    background: linear-gradient(90deg, rgb(255, 128, 0), #ffb300);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -102,7 +102,7 @@ body {
 .links a.active {
     background: rgba(255, 255, 255, 0.2);
     color: white;
-    border-left: 3px solid gold;
+    border-left: 3px solid #ffb300;
 }
 
 .links i {
