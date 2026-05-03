@@ -73,7 +73,7 @@ municipalities.forEach(function(m) {
 
   var li = document.createElement("li");
   var a = document.createElement("a");
-  a.href = "game/" + m.slug + ".html";
+  a.href = "games/" + m.slug + ".html";
   a.innerText = m.name;
   li.appendChild(a);
   muniList.appendChild(li);
