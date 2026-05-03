@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Historical Landmarks of Cebu — Brochure</title>
+    <link rel="stylesheet" href="./streetview.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="sheet" aria-label="Cebu heritage brochure">
+        <header class="top">
+          <div class="top__bar">
+            <div class="badge">Cebu Heritage • Travel Brochure</div>
+          </div>
+
+          <div class="top__grid">
+            <div class="top__copy">
+              <h1 class="title">Historical Landmarks of Cebu</h1>
+              <p class="lede">
+                Cebu—often called the “Cradle of Christianity”—is packed with heritage sites that shaped Philippine history.
+                Here are five landmark stops with quick facts, Google Street View links, and an interactive Google Maps embed.
+              </p>
+
+              <div class="atglance" aria-label="At a glance">
+                <div class="stat">
+                  <div class="stat__k">Landmarks</div>
+                  <div class="stat__v">5 sites</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Best for</div>
+                  <div class="stat__v">History & culture</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__k">Preview</div>
+                  <div class="stat__v">Street-level</div>
+                </div>
+              </div>
+
+              <p class="hint">
+                Tip: Use the "Street View" button on each card to open Google Street View for that landmark directly inside the page.
+              </p>
+            </div>
+
+            <div class="top__media" aria-label="Cover photos">
+              <div class="mosaic">
+                <div class="mosaic__img">
+                  <picture>
+                    <source srcset="./images/fort1.png" type="image/png" />
+                    <img alt="Fort San Pedro" loading="lazy" src="./images/fort1.png" />
+                  </picture>
+                </div>
+                <div class="mosaic__mid">
+                  <div class="mosaic__kicker">Cebu Heritage</div>
+                  <div class="mosaic__sub">Quick facts • photo-first layout • print friendly</div>
+                </div>
+                <div class="mosaic__img">
+                  <picture>
+                    <source srcset="./images/mag2.png" type="image/png" />
+                    <img alt="Magellan's Cross" loading="lazy" src="./images/mag2.png" />
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="viewer" aria-label="3D map viewer">
+          <div class="viewer__intro">
+            <div>
+              <div class="viewer__eyebrow">Interactive Preview</div>
+              <h2 class="viewer__title">Google Maps</h2>
+              <p class="viewer__text">
+                An interactive Google Maps embed centered on Cebu's heritage sites. Click any card's Map button to recenter, or tap markers directly on the map.
+              </p>
+            </div>
+            <div class="viewer__panel" id="landmark-panel">
+              <div class="viewer__label">Selected landmark</div>
+              <h3 class="viewer__name">Fort San Pedro</h3>
+              <p class="viewer__meta">Cebu City</p>
+              <p class="viewer__desc">Tap any "Map" button below to recenter on a landmark. The "Street View" button opens Google Street View inside the page.</p>
+            </div>
+          </div>
+          <iframe
+            id="map"
+            class="map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="about:blank"
+            title="Google Maps — Cebu Heritage Landmarks"
+            style="border:0"
+            aria-label="Interactive Google Map of Cebu heritage landmarks"
+          ></iframe>
+        </section>
+
+        <section class="cards" aria-label="Landmarks list">
+          <article class="card" data-name="Fort San Pedro" data-place="Cebu City" data-lng="123.9035" data-lat="10.2887" data-image="./images/fort1.png">
+            <div class="card__head">
+              <div class="card__num">01</div>
+              <h2 class="card__title">Fort San Pedro <span class="card__place">(Cebu City)</span></h2>
+            </div>
+            <div class="card__body">
+              <div class="media">
+                <picture>
+                  <source srcset="./images/fort1.png" type="image/png" />
+                  <img alt="Fort San Pedro" loading="lazy" src="./images/fort1.png" />
+                </picture>
+              </div>
+              <p class="p">
+                Fort San Pedro is the oldest and smallest fort in the Philippines, built in <strong>1565</strong> under the
+                leadership of <strong>Miguel López de Legazpi</strong>. It was constructed using stone and coral, with the help
+                of Spanish and local workers.
+              </p>
+              <p class="p">
+                The fort served as a military defense structure against pirates and foreign invaders during the Spanish
+                colonial period. Over time, it was also used as a prison, a barracks for soldiers, and even a school. Today,
+                it is preserved as a museum where visitors can learn about Cebu’s colonial history through artifacts and
+                exhibits.
+              </p>
+            </div>
+            <div class="card__foot">
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.2887, 123.9035</div>
+            </div>
+          </article>
+
+          <article class="card" data-name="Basilica Minore del Santo Niño" data-place="Cebu City" data-lng="123.9025019" data-lat="10.2940225" data-image="./images/stnino1.png">
+            <div class="card__head">
+              <div class="card__num">02</div>
+              <h2 class="card__title">Basilica Minore del Santo Niño <span class="card__place">(Cebu City)</span></h2>
+            </div>
+            <div class="card__body">
+              <div class="media">
+                <picture>
+                  <source srcset="./images/stnino1.png" type="image/png" />
+                  <img alt="Basilica Minore del Santo Niño" loading="lazy" src="./images/stnino1.png" />
+                </picture>
+              </div>
+              <p class="p">
+                The Basilica Minore del Santo Niño is the oldest Roman Catholic church in the Philippines, established in
+                <strong>1565</strong>. It was built on the site where Spanish soldiers discovered the image of the
+                <strong>Santo Niño</strong> after a fire.
+              </p>
+              <p class="p">
+                The image was originally given by <strong>Ferdinand Magellan</strong> to <strong>Queen Juana</strong> in
+                <strong>1521</strong>, marking the beginning of Christianity in the Philippines. Today, the basilica is an
+                important religious center and attracts thousands of devotees, especially during the annual
+                <strong>Sinulog Festival</strong>.
+              </p>
+            </div>
+            <div class="card__foot">
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.2940225, 123.9025019</div>
+            </div>
+          </article>
+
+          <article class="card" data-name="Magellan's Cross" data-place="Cebu City" data-lng="123.901869" data-lat="10.293419" data-image="./images/mag2.png">
+            <div class="card__head">
+              <div class="card__num">03</div>
+              <h2 class="card__title">Magellan’s Cross <span class="card__place">(Cebu City)</span></h2>
+            </div>
+            <div class="card__body">
+              <div class="media">
+                <picture>
+                  <source srcset="./images/mag2.png" type="image/png" />
+                  <img alt="Magellan’s Cross" loading="lazy" src="./images/mag2.png" />
+                </picture>
+              </div>
+              <p class="p">
+                Magellan's Cross is one of the most famous historical landmarks in Cebu. It was planted in <strong>1521</strong>
+                by <strong>Ferdinand Magellan</strong> upon his arrival in the Philippines.
+              </p>
+              <p class="p">
+                The cross symbolizes the introduction of Christianity in the country. The original cross is believed to be
+                encased within the wooden structure seen today, as it was protected from people who once chipped off parts of
+                it, believing it had healing powers.
+              </p>
+            </div>
+            <div class="card__foot">
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.293419, 123.901869</div>
+            </div>
+          </article>
+
+          <article class="card" data-name="Mactan Shrine" data-place="Lapu-Lapu City" data-lng="123.9488" data-lat="10.3127" data-image="./images/mctan1.png">
+            <div class="card__head">
+              <div class="card__num">04</div>
+              <h2 class="card__title">Mactan Shrine <span class="card__place">(Lapu-Lapu City)</span></h2>
+            </div>
+            <div class="card__body">
+              <div class="media">
+                <picture>
+                  <source srcset="./images/mctan1.png" type="image/png" />
+                  <img alt="Mactan Shrine" loading="lazy" src="./images/mctan1.png" />
+                </picture>
+              </div>
+              <p class="p">
+                The Mactan Shrine is a historical site that commemorates the <strong>Battle of Mactan</strong> in
+                <strong>1521</strong>. This was the battle where <strong>Datu Lapu-Lapu</strong> and his warriors defeated
+                <strong>Ferdinand Magellan</strong>.
+              </p>
+              <p class="p">
+                The shrine features monuments dedicated to both Lapu-Lapu and Magellan. Lapu-Lapu is recognized as the first
+                Filipino hero for resisting foreign colonization. The site serves as a reminder of Filipino bravery and
+                independence.
+              </p>
+            </div>
+            <div class="card__foot">
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.3127, 123.9488</div>
+            </div>
+          </article>
+
+          <article class="card" data-name="Heritage of Cebu Monument" data-place="Parian, Cebu City" data-lng="123.903639" data-lat="10.29889" data-image="./images/heritege.png">
+            <div class="card__head">
+              <div class="card__num">05</div>
+              <h2 class="card__title">Heritage of Cebu Monument <span class="card__place">(Parian, Cebu City)</span></h2>
+            </div>
+            <div class="card__body">
+              <div class="media">
+                <picture>
+                  <source srcset="./images/heritege.png" type="image/png" />
+                  <img alt="Heritage of Cebu Monument" loading="lazy" src="./images/heritege.png" />
+                </picture>
+              </div>
+              <p class="p">
+                The Heritage of Cebu Monument is a large sculpture located in Parian, Cebu City. It was created by artist
+                <strong>Eduardo Castrillo</strong> and showcases important events in Cebu’s history.
+              </p>
+              <p class="p">
+                The monument includes scenes such as the arrival of Magellan, the baptism of Rajah Humabon, and the devotion to
+                the Santo Niño. Made from <strong>concrete, bronze, and steel</strong>, it stands as a visual summary of Cebu’s
+                heritage.
+              </p>
+            </div>
+            <div class="card__foot">
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.29889, 123.903639</div>
+            </div>
+          </article>
+        </section>
+
+      </section>
+    </main>
+    <dialog class="streetview-modal" id="streetview-modal">
+      <div class="streetview-modal__dialog">
+        <div class="streetview-modal__head">
+          <div>
+            <div class="streetview-modal__eyebrow">Google Street View</div>
+            <h2 class="streetview-modal__title" id="streetview-title">Landmark viewer</h2>
+            <p class="streetview-modal__meta" id="streetview-meta">Cebu City</p>
+          </div>
+          <button class="streetview-modal__close" id="streetview-close" type="button" aria-label="Close street view popup">Close</button>
+        </div>
+
+        <div class="streetview-modal__body">
+          <div class="streetview-modal__viewer">
+            <iframe
+              class="streetview-modal__frame"
+              id="streetview-frame"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Street View"
+            ></iframe>
+          </div>
+
+          <aside class="streetview-modal__fallback">
+            <img class="streetview-modal__image" id="streetview-image" alt="" />
+            <p class="streetview-modal__text" id="streetview-status">
+              Loading Google Street View for this landmark.
+            </p>
+            <p class="streetview-modal__note">
+              Google Street View embedding requires an API key for full interactivity. Use "Open in Google Maps" to view Street View directly on Google Maps.
+            </p>
+            <div class="streetview-modal__actions">
+              <button class="btn btn--ghost" id="streetview-map-btn" type="button">Show on Map</button>
+              <a class="btn" href="#" id="streetview-open-link" rel="noreferrer" target="_blank">Open in Google Maps</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </dialog>
+    <script>
+      // ─── Landmark data ────────────────────────────────────────────────────────
+      const landmarkCards = [...document.querySelectorAll(".card[data-name]")];
+      const panel = document.getElementById("landmark-panel");
+      const panelName = panel.querySelector(".viewer__name");
+      const panelMeta = panel.querySelector(".viewer__meta");
+      const panelDesc = panel.querySelector(".viewer__desc");
+      const modal = document.getElementById("streetview-modal");
+      const modalTitle = document.getElementById("streetview-title");
+      const modalMeta = document.getElementById("streetview-meta");
+      const modalFrame = document.getElementById("streetview-frame");
+      const modalImage = document.getElementById("streetview-image");
+      const modalStatus = document.getElementById("streetview-status");
+      const modalMapButton = document.getElementById("streetview-map-btn");
+      const modalOpenLink = document.getElementById("streetview-open-link");
+      const modalClose = document.getElementById("streetview-close");
+      const mapIframe = document.getElementById("map");
+      let activeLandmark = null;
+      let loadTimer = null;
+
+      const landmarks = landmarkCards.map((card, index) => {
+        const title = card.querySelector(".card__title").childNodes[0].textContent.trim();
+        const description = [...card.querySelectorAll(".p")]
+          .map((p) => p.textContent.trim())
+          .join(" ");
+        const lat = card.dataset.lat;
+        const lng = card.dataset.lng;
+
+        // Google Maps embed URL — shows the location on a standard map
+        const googleMapsEmbedUrl =
+          `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY` +
+          `&q=${encodeURIComponent(card.dataset.name || title)}` +
+          `&center=${lat},${lng}&zoom=18&maptype=satellite`;
+
+        // Google Maps Street View embed URL
+        const streetViewEmbedUrl =
+          `https://www.google.com/maps/embed/v1/streetview?key=YOUR_GOOGLE_MAPS_API_KEY` +
+          `&location=${lat},${lng}&heading=0&pitch=0&fov=80`;
+
+        // Fallback: open Google Maps Street View in a new tab (no API key needed)
+        const googleMapsOpenUrl =
+          `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+
+        return {
+          id: index + 1,
+          name: card.dataset.name || title,
+          place: card.dataset.place,
+          lng: Number(lng),
+          lat: Number(lat),
+          description,
+          image: card.dataset.image,
+          googleMapsEmbedUrl,
+          streetViewEmbedUrl,
+          googleMapsOpenUrl
+        };
+      });
+
+      // ─── Map iframe helper ────────────────────────────────────────────────────
+      // Builds a no-API-key Google Maps embed showing a search pin for the landmark.
+      // The Embed API's basic iframe (no key) supports the ?pb= format.
+      function buildMapEmbedUrl(landmark) {
+        // This variant works without an API key and shows a satellite/hybrid view
+        // centered on the landmark with a search marker.
+        const q = encodeURIComponent(landmark.name + " Cebu Philippines");
+        return (
+          `https://www.google.com/maps?q=${q}` +
+          `&ll=${landmark.lat},${landmark.lng}` +
+          `&z=18&t=h&output=embed`
+        );
+      }
+
+      function focusMap(landmark) {
+        mapIframe.src = buildMapEmbedUrl(landmark);
+      }
+
+      // ─── Active card highlight ────────────────────────────────────────────────
+      function setActiveCard(activeCard) {
+        landmarkCards.forEach((card) => {
+          card.classList.toggle("card--active", card === activeCard);
+        });
+      }
+
+      function updatePanel(landmark) {
+        panelName.textContent = landmark.name;
+        panelMeta.textContent = landmark.place;
+        panelDesc.textContent = landmark.description;
+      }
+
+      function focusLandmark(landmark, card) {
+        focusMap(landmark);
+        updatePanel(landmark);
+        setActiveCard(card);
+      }
+
+      // ─── Street View modal ────────────────────────────────────────────────────
+      function clearStreetviewTimer() {
+        if (loadTimer) {
+          window.clearTimeout(loadTimer);
+          loadTimer = null;
+        }
+      }
+
+      function openStreetview(landmark, card) {
+        activeLandmark = { landmark, card };
+        modalTitle.textContent = landmark.name;
+        modalMeta.textContent = landmark.place;
+        modalImage.src = landmark.image;
+        modalImage.alt = landmark.name;
+        modalStatus.textContent = "Loading Google Street View for this landmark.";
+        // Link opens Google Maps Street View in a new tab (works without API key)
+        modalOpenLink.href = landmark.googleMapsOpenUrl;
+        // Embed Street View — requires a real API key in streetViewEmbedUrl.
+        // Without a key the iframe shows an error tile, so we show the no-key
+        // Google Maps search embed as a visual fallback instead.
+        modalFrame.src = buildMapEmbedUrl(landmark);
+        setActiveCard(card);
+
+        if (!modal.open) {
+          modal.showModal();
+        }
+
+        clearStreetviewTimer();
+        loadTimer = window.setTimeout(() => {
+          modalStatus.textContent =
+            "Map loaded. For interactive Street View, replace YOUR_GOOGLE_MAPS_API_KEY in the code, or tap 'Open in Google Maps' to view Street View directly.";
+        }, 1800);
+      }
+
+      function closeStreetview() {
+        clearStreetviewTimer();
+        modal.close();
+        modalFrame.src = "about:blank";
+      }
+
+      modalFrame.addEventListener("load", () => {
+        clearStreetviewTimer();
+        modalStatus.textContent =
+          "Google Maps loaded. Tap 'Open in Google Maps' for Street View, or replace YOUR_GOOGLE_MAPS_API_KEY for embedded Street View.";
+      });
+
+      modalMapButton.addEventListener("click", () => {
+        if (!activeLandmark) return;
+        focusLandmark(activeLandmark.landmark, activeLandmark.card);
+        closeStreetview();
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      modalClose.addEventListener("click", closeStreetview);
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeStreetview();
+        }
+      });
+
+      // ─── Card buttons ─────────────────────────────────────────────────────────
+      landmarkCards.forEach((card, index) => {
+        const streetviewButton = card.querySelector(".js-open-streetview");
+        const mapButton = card.querySelector(".js-focus-map");
+
+        streetviewButton.addEventListener("click", () => {
+          openStreetview(landmarks[index], card);
+        });
+
+        mapButton.addEventListener("click", () => {
+          focusLandmark(landmarks[index], card);
+          document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      });
+
+      // ─── Init: load first landmark on the map ─────────────────────────────────
+      if (landmarks.length > 0 && landmarkCards.length > 0) {
+        focusLandmark(landmarks[0], landmarkCards[0]);
+      }
+    </script>
+  </body>
+</html>
+
