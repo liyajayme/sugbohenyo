@@ -7,10 +7,7 @@
 body {
     min-height: 100vh;
     display: flex;
-    background-image: url("images/sunrise.gif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/sunrise.gif') center/cover no-repeat;
     overflow-x: hidden;
     font-family: 'Press Start 2P', system-ui;
 }
@@ -21,6 +18,10 @@ body::before {
     inset: 0;
     background: rgba(0, 0, 0, 0.2);
     z-index: 0;
+}
+
+.profile-rank i {
+    margin-right: 7px;
 }
 
 #username {
@@ -75,6 +76,10 @@ body::before {
     border: 1px solid rgba(255, 215, 0, 0.35);
     border-radius: 15px;
     box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+.profile-joined {
+    margin-top: 5px;
 }
 
 .profile-avatar {
