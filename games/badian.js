@@ -237,18 +237,18 @@ class MainScene extends Phaser.Scene {
 
         this.enemies = this.physics.add.group();
 
-        let enemy1 = this.enemies.create(600, 220, 'enemy');
-        enemy1.setScale(1);
+        let enemy1 = this.enemies.create(600, 220, 'enemy_walk1');
+        enemy1.setScale(.8);
         enemy1.setVelocityX(-90);
 
-        let enemy2 = this.enemies.create(900, 220, 'enemy');
-        enemy2.setScale(1);
+        let enemy2 = this.enemies.create(900, 220, 'enemy_walk1');
+        enemy2.setScale(.8);
         enemy2.setVelocityX(-90);
         enemy2.minX = 950;
         enemy2.maxX = 1030;
 
-        let enemy3 = this.enemies.create(1390, 220, 'enemy');
-        enemy3.setScale(1);
+        let enemy3 = this.enemies.create(1390, 220, 'enemy_walk1');
+        enemy3.setScale(.8);
         enemy3.setVelocityX(-90);
 
         this.player = this.physics.add.sprite(20, 130, 'rajahH_idle'); //(x, y, key)
