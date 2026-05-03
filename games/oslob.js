@@ -9,17 +9,16 @@ class MainScene extends Phaser.Scene {
         this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');
         this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
         this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/badian/bg_badian.png');
-        this.load.image('grass', 'assets/badian/badian_ground.png');
+        this.load.image('bg', 'assets/oslob/bg_oslob.png');
+        this.load.image('grass', 'assets/oslob/oslob_ground.png');
         this.load.image('xs_log', 'assets/logs/xs_log.png');
         this.load.image('s_log', 'assets/logs/s_log.png');
         this.load.image('med_log', 'assets/logs/med_log.png');
         this.load.image('l_log', 'assets/logs/l_log.png');
-        this.load.image('falls', 'assets/badian/waterfalls_badian.png');
-        this.load.image('banig', 'assets/badian/banig.png');
-        this.load.image('enemy', 'assets/snake/snake0.png');
-        this.load.image('enemy_walk1', 'assets/snake/snake1.png');
-        this.load.image('enemy_walk2', 'assets/snake/snake2.png');
+        this.load.image('ruins', 'assets/oslob/oslob_watchtower.png');
+        this.load.image('pearl', 'assets/pre-colonial/pearl.png');
+        this.load.image('enemy_walk1', 'assets/crab/crab1.png');
+        this.load.image('enemy_walk2', 'assets/crab/crab2.png');
     }
 
     showDialogue() {
@@ -98,8 +97,8 @@ class MainScene extends Phaser.Scene {
     }
 
 
-    collectBanig(player, banig) {
-        banig.disableBody(true, true);
+    collectPearl(player, pearl) {
+        pearl.disableBody(true, true);
 
         this.score += 15;
         this.scoreText.setText('Score: ' + this.score);
@@ -152,14 +151,10 @@ class MainScene extends Phaser.Scene {
 
             // =====================
             // START AREA (very easy)
-            // =====================
-            { x: 250, y: 190, key: 'l_log', w: 63, h: 12 },
-            { x: 360, y: 130, key: 's_log', w: 34, h: 12 },
-
+            // ==================
             // =====================
             // FIRST GAP (teaches jump timing)
             // =====================
-            { x: 780, y: 190, key: 'l_log', w: 63, h: 12 },
 
             // floating stepping stones
             { x: 900, y: 150, key: 's_log', w: 34, h: 12 },
@@ -167,14 +162,14 @@ class MainScene extends Phaser.Scene {
             // =====================
             // MID SECTION (zig-zag movement)
             // =====================
-            { x: 1120, y: 200, key: 'l_log', w: 63, h: 12 },
-            { x: 1280, y: 200, key: 'l_log', w: 63, h: 12 },
-            { x: 1380, y: 140, key: 's_log', w: 34, h: 12 },
+            { x: 1300, y: 190, key: 'xs_log', w: 23, h: 12 },
+            { x: 1350, y: 160, key: 'xs_log', w: 23, h: 12 },
+            { x: 1400, y: 130, key: 'xs_log', w: 23, h: 12 },
 
             // reward platform
             { x: 1600, y: 130, key: 'med_log', w: 53, h: 12 },
         ];
-        for (let x = 0; x < 3000; x += 325) { // creates a repeating background by adding multiple instances of the 'bg' image across the level, spaced 155 pixels apart
+        for (let x = 0; x < 3000; x += 650) { // creates a repeating background by adding multiple instances of the 'bg' image across the level, spaced 155 pixels apart
             let bg = this.add.image(x, 145, 'bg'); // (x, y, key) 
             bg.setScale(5); // (scale) scales the background image to fit the desired size for the level, ensuring it covers the entire area without distortion
         }
@@ -224,41 +219,93 @@ class MainScene extends Phaser.Scene {
             platform.body.setOffset(5, 0);
         });
 
-        this.banig = this.physics.add.group({
+        this.movingPlatforms = this.physics.add.group({
+            immovable: true,
             allowGravity: false
         });
 
-        this.banig.create(360, 100, 'banig').setScale(0.45);;
-        this.banig.create(900, 123, 'banig').setScale(0.45);
-        this.banig.create(990, 80, 'banig').setScale(0.45);
-        this.banig.create(990, 230, 'banig').setScale(0.45);
-        this.banig.create(1260, 120, 'banig').setScale(0.45);
-        this.banig.create(1580, 100, 'banig').setScale(0.45);
+        this.movingPlatforms = this.physics.add.group({
+            immovable: true,
+            allowGravity: false
+        });
+
+        // helper function to create moving platforms
+        this.createMovingPlatform = (x, y, range, speed, axis = 'x') => {
+            let plat = this.movingPlatforms.create(x, y, 'med_log')
+                .setScale(0.2)
+                .refreshBody();
+
+            plat.body.setAllowGravity(false);
+            plat.body.setImmovable(true);
+
+            plat.start = axis === 'x' ? x : y;
+            plat.end = plat.start + range;
+            plat.speed = speed;
+            plat.axis = axis;
+            plat.direction = 1;
+
+            return plat;
+        };
+
+        // horizontal movers
+        this.createMovingPlatform(250, 200, 170, 60, 'x');
+        this.createMovingPlatform(750, 200, 150, 60, 'x'); 
+        this.createMovingPlatform(980, 150, 150, 60, 'x');
+        
+
+        this.pearl = this.physics.add.group({
+            allowGravity: false
+        });
+
+        this.pearl.create(360, 100, 'pearl').setScale(0.15);;
+        this.pearl.create(900, 123, 'pearl').setScale(0.15);
+        this.pearl.create(990, 80, 'pearl').setScale(0.15);
+        this.pearl.create(990, 230, 'pearl').setScale(0.15);
+        this.pearl.create(1260, 120, 'pearl').setScale(0.15);
+        this.pearl.create(1580, 100, 'pearl').setScale(0.15);
+
+        let highPlat = this.platforms.create(1700, 90, 'xs_log')
+            .setScale(0.2)
+            .refreshBody();
+
+        highPlat.body.setSize(20, 12);
+        highPlat.body.setOffset(5, 0);
+
+        this.pearl.create(1700, 60, 'pearl').setScale(0.15);
 
         this.enemies = this.physics.add.group();
 
         let enemy1 = this.enemies.create(600, 220, 'enemy_walk1');
-        enemy1.setScale(.8);
+        enemy1.setScale(.6);
         enemy1.setVelocityX(-90);
 
         let enemy2 = this.enemies.create(900, 220, 'enemy_walk1');
-        enemy2.setScale(.8);
+        enemy2.setScale(.6);
         enemy2.setVelocityX(-90);
         enemy2.minX = 950;
         enemy2.maxX = 1030;
 
-        let enemy3 = this.enemies.create(1390, 220, 'enemy_walk1');
-        enemy3.setScale(.8);
-        enemy3.setVelocityX(-90);
+        let enemy3 = this.enemies.create(1390, 220, 'enemy_walk1'); 
+        enemy3.setScale(.6);
+        enemy3.setVelocityX(-150);
+        enemy3.minX = 1150;
+        enemy3.maxX = 1280;
+
+        let trapPlat = this.platforms.create(1500, 180, 'l_log')
+            .setScale(0.2)
+            .refreshBody();
+
+        trapPlat.body.setSize(63, 12);
+        trapPlat.body.setOffset(5, 0);
 
         this.player = this.physics.add.sprite(20, 130, 'rajahH_idle'); //(x, y, key)
         this.player.setScale(.09);
         this.player.setCollideWorldBounds(true);
         this.physics.world.setBoundsCollision(true, true, true, false);
 
-        this.falls = this.physics.add.staticImage(1934, 200, 'falls');
-        this.falls.setScale(3);
-        this.falls.refreshBody();
+        this.ruins = this.physics.add.staticImage(1934, 177, 'ruins');
+        this.ruins.setScale(.19);
+        this.ruins.refreshBody();
 
         this.physics.add.collider(this.player, ground); // (object1, object2)
         this.physics.add.collider(this.player, this.platforms);
@@ -279,11 +326,10 @@ class MainScene extends Phaser.Scene {
         );
 
         this.dialogues = [
-            "Badian, Cebu is a coastal municipality shaped by mountains, rivers, and long-standing local communities.",
-            "For generations, people here have relied on farming, fishing, and traditional weaving,",
-            "including banig (mat) making as part of daily life.",
-            "Kawasan Falls, formed by river systems flowing from Cebu’s highlands, is one of its most known natural landmarks.",
-            "Your journey follows these historic paths through Badian, where banig traditions and natural routes lead toward Kawasan Falls."
+            "Oslob, Cebu is a coastal town where history and marine life come together in one place.",
+            "Once a Spanish-era defense site, its watchtowers and coral stone structures still stand today.",
+            "The town is known for the gentle whale sharks of Tan-awan and the beauty of Sumilon Island and Tumalog Falls.",
+            "Your journey continues through Oslob, where heritage, faith, and nature shape its identity."
         ];
 
         this.dialogIndex = 0;
@@ -318,10 +364,25 @@ class MainScene extends Phaser.Scene {
 
         this.enemyFrames = ['enemy_walk1', 'enemy_walk2'];
 
-        this.physics.add.overlap(this.player, this.banig, this.collectBanig, null, this); // allows the player to collect banig items by overlapping with them, triggering the collectBanig callback function when the overlap occurs
+        this.physics.add.collider(
+            this.player,
+            this.movingPlatforms,
+            (player, platform) => {
+                // ONLY carry player if standing on top
+                if (player.body.touching.down && platform.body.touching.up) {
+                    player.x += platform.body.velocity.x * (this.game.loop.delta / 1000);
+                    player.y += platform.body.velocity.y * (this.game.loop.delta / 1000);
+                }
+            },
+            null,
+            this
+        );
+        this.player.setDragX(600);
+        this.physics.add.collider(this.enemies, this.movingPlatforms);
+        this.physics.add.overlap(this.player, this.pearl, this.collectPearl, null, this); // allows the player to collect pearl items by overlapping with them, triggering the collectPearl callback function when the overlap occurs
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
         this.physics.world.setBounds(0, 0, 2000, 288);
-this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width, height, checkLeft, checkRight, checkUp, checkDown) 
+        this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width, height, checkLeft, checkRight, checkUp, checkDown) 
         this.cameras.main.setBounds(0, 0, 2000, 288); // (x, y, width, height)
         this.cameras.main.setDeadzone(256, 288); // (width, height)
         this.maxReachedX = this.player.x; // keeps track of the furthest horizontal position the player has reached, used to prevent the camera from moving back to areas the player has already passed
@@ -337,6 +398,22 @@ this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width,
                 this.physics.pause(); // pause ONLY when grounded
             }
         }
+
+        this.movingPlatforms.children.iterate((plat) => {
+            if (!plat) return;
+
+            if (plat.axis === 'x') {
+                plat.setVelocityX(plat.speed * plat.direction);
+
+                if (plat.x >= plat.end) plat.direction = -1;
+                if (plat.x <= plat.start) plat.direction = 1;
+            } else {
+                plat.setVelocityY(plat.speed * plat.direction);
+
+                if (plat.y >= plat.end) plat.direction = -1;
+                if (plat.y <= plat.start) plat.direction = 1;
+            }
+        });
 
         this.enemies.children.iterate((enemy) => {
             if (!enemy) return;
@@ -475,7 +552,7 @@ class EndScene extends Phaser.Scene {
     create() {
         this.cameras.main.fadeIn(800, 0, 0, 0);
 
-        this.add.text(256, 120, "Badian Level Complete", {
+        this.add.text(256, 120, "Oslob Level Complete", {
             fontSize: '32px',
             fill: '#ffffff'
         }).setOrigin(0.5);

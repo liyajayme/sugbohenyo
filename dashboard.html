@@ -30,12 +30,11 @@
         <section class="section">
             <h3 class="section-title"><i class="fa-solid fa-circle-user"></i>Profile</h3>
             <div class="profile-card">
-                <div class="profile-avatar">
-                    <img src="images/avatar.png" alt="avatar" id="profile-avatar"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="avatar-fallback" style="display:none">
+                <div class="profile-avatar" onclick="document.getElementById('avatar-upload').click()">
+                    <div class="avatar-fallback" style="display:flex">
                         <i class="fa-solid fa-user"></i>
                     </div>
+                    <input type="file" id="avatar-upload" accept="image/*" hidden>
                 </div>
 
                 <div class="profile-info">
@@ -183,4 +182,4 @@
     <script src="dashboard.js"></script>
 </body>
 
-</html>
+</html>>
