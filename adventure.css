@@ -1,84 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/images/sunrise.gif') center/cover no-repeat;
 }
 
-.game-cards {
-    display: flex;
-    gap: 25px;
+.content {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  margin-left: 245px;
+  padding: 16px;
+  gap: 25px;
+  height: 100%;
 }
 
-.card {
-    width: 170px;
-    padding: 20px;
-    background: linear-gradient(145deg, #1f1f2e, #2a2a3d);
-    border-radius: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+#map-container {
+  position: relative;
+  flex-shrink: 0;
+  width: fit-content;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
 }
 
-.card:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+#map-img {
+  height: 95vh;
+  width: auto;
+  display: block;
 }
 
-.card h2 {
-    margin-bottom: 10px;
-    font-size: 20px;
+#tooltip {
+  position: fixed;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  pointer-events: none;
+  border-radius: 6px;
+  display: none;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.card p {
-    font-size: 14px;
-    color: #bbb;
+.dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #e63000;
+  border-radius: 50% 50% 50% 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.15s;
 }
 
-.locked {
-    filter: grayscale(80%);
-    opacity: 0.6;
+.dot::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
 }
 
-.locked::after {
-    content: "🔒";
-    font-size: 28px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.dot:hover {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1.4);
 }
 
-.completed {
-    border: 2px solid #00ffcc;
-    box-shadow: 0 0 15px #00ffcc;
+.muni-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+  background: rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 20px 16px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
-.completed::after {
-    content: "✔";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #00ffcc;
-    font-weight: bold;
-    font-size: 18px;
+.muni-info h2 {
+  font-family: inherit;
+  font-size: 25px;
+  font-weight: bold;
+  color: #3a1a00;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(0,0,0,0.15);
+  line-height: 1.4;
 }
 
-.card-link {
-    text-decoration: none;
-    color: inherit;
+#muni-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
 }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
+#muni-list::-webkit-scrollbar {
+  width: 4px;
 }
 
-.card {
-    animation: float 3s ease-in-out infinite;
+#muni-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#muni-list::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+#muni-list li a {
+  display: block;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 20px;
+  color: #3a1a00;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.15s, padding-left 0.15s;
+}
+
+#muni-list li a:hover {
+  background: rgba(0,0,0,0.1);
+  padding-left: 16px;
 }
