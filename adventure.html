@@ -1,41 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventure Game</title>
-    <link rel="stylesheet" href="adventure.css">
+  <meta charset="UTF-8">
+  <title>Cebu Map</title>
+  <link rel="stylesheet" href="adventure.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div id="sidebar"></div>
-    
-    <div class="game-cards">
+  <div id="sidebar"></div>
 
-        <a class="card-link" id="level1-link" href="/games/level1.html">
-            <div class="card" id="level1">
-                <h2>Level 1</h2>
-                <p>Pre-Colonial Era</p>
-            </div>
-        </a>
-
-        <a class="card-link" id="level2-link" href="/games/level2.html">
-            <div class="card locked" id="level2">
-                <h2>Level 2</h2>
-                <p>Battle of Mactan</p>
-            </div>
-        </a>
-
-        <a class="card-link" id="level3-link" href="level3.html">
-            <div class="card locked" id="level3">
-                <h2>Level 3</h2>
-                <p>Secret</p>
-            </div>
-        </a>
-
+  <div class="content">
+    <div id="map-container">
+      <div id="tooltip"></div>
+      <img src="images/cebu.png" id="map-img">
     </div>
 
-    <script src="sidebar.js"></script>
+    <div class="muni-info">
+      <h2>Choose an available municipality to play on!</h2>
+      <ul id="muni-list"></ul>
+    </div>
+  </div>
 
-    <script src="adventure.js"></script>
+  <script src="adventure.js"></script>
+  <script src="sidebar.js"></script>
 </body>
+
 </html>
