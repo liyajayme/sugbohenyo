@@ -5,12 +5,16 @@
 
 /* REMOVE page centering + make full screen */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Press Start 2P', monospace;
     margin: 0;
     padding: 0;
-    background: url("images/bg.png") center/cover no-repeat;
+    background: url("images/sunrise.gif") center/cover no-repeat;
     height: 100vh;
     overflow: hidden;
+}
+
+.map-page .nav {
+    background: linear-gradient(180deg, rgb(255, 123, 0), #ff6a00) !important;
 }
 
 /* Map wrapper becomes full screen */
@@ -145,7 +149,7 @@ select {
     padding: 9px 14px;
     border-radius: 8px;
     border: 1.5px solid var(--gold);
-    background: rgba(13, 17, 23, 0.75);
+    background: rgba(255, 255, 255, 0.26);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: var(--gold);
@@ -164,7 +168,7 @@ select:hover, select:focus {
 }
 
 select option {
-    background: rgba(13, 17, 23, 0.75);
+    background: rgba(255, 255, 255, 0.26);
     color: var(--gold);
 }
 
@@ -175,7 +179,7 @@ select option {
 }
 
 .leaflet-bar a {
-    background: rgba(13, 17, 23, 0.75) !important;
+    background: rgba(255, 255, 255, 0.26) !important;
     backdrop-filter: blur(12px) !important;
     color: var(--gold) !important;
     border: 1.5px solid rgba(232, 160, 32, 0.4) !important;
@@ -183,7 +187,7 @@ select option {
 }
 
 .leaflet-bar a:hover {
-    background: rgba(25, 33, 44, 0.75) !important;
+    background: rgba(219, 219, 219, 0.415) !important;
     color: #f5c050 !important;
 }
 
