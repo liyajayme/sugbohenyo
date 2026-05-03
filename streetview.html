@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Historical Landmarks of Cebu — Brochure</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="./streetview.css" />
   </head>
   <body>
@@ -69,32 +70,23 @@
           <div class="viewer__intro">
             <div>
               <div class="viewer__eyebrow">Interactive Preview</div>
-              <h2 class="viewer__title">Google Maps</h2>
+              <h2 class="viewer__title">3D Map</h2>
               <p class="viewer__text">
-                An interactive Google Maps embed centered on Cebu's heritage sites. Click any card's Map button to recenter, or tap markers directly on the map.
+                A 3D map centered on Cebu's heritage sites. Click any card's Map button to fly to a landmark.
               </p>
             </div>
             <div class="viewer__panel" id="landmark-panel">
               <div class="viewer__label">Selected landmark</div>
               <h3 class="viewer__name">Fort San Pedro</h3>
               <p class="viewer__meta">Cebu City</p>
-              <p class="viewer__desc">Tap any "Map" button below to recenter on a landmark. The "Street View" button opens Google Street View inside the page.</p>
+              <p class="viewer__desc">Tap any "Map" button below to fly to a landmark. The "Street View" button opens Google Street View inside the page.</p>
             </div>
           </div>
-          <iframe
-            id="map"
-            class="map"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="about:blank"
-            title="Google Maps — Cebu Heritage Landmarks"
-            style="border:0"
-            aria-label="Interactive Google Map of Cebu heritage landmarks"
-          ></iframe>
+          <div id="map" class="map" role="img" aria-label="Interactive 3D map of Cebu heritage landmarks"></div>
         </section>
 
         <section class="cards" aria-label="Landmarks list">
-          <article class="card" data-name="Fort San Pedro" data-place="Cebu City" data-lng="123.9035" data-lat="10.2887" data-image="./images/fort1.png">
+          <article class="card" data-name="Fort San Pedro" data-place="Cebu City" data-lng="123.9059101" data-lat="10.2921803" data-image="./images/fort1.png">
             <div class="card__head">
               <div class="card__num">01</div>
               <h2 class="card__title">Fort San Pedro <span class="card__place">(Cebu City)</span></h2>
@@ -123,7 +115,7 @@
                 <button class="btn js-open-streetview" type="button">Open Street View</button>
                 <button class="btn btn--ghost js-focus-map" type="button">Map</button>
               </div>
-              <div class="coords"><strong>Coordinates:</strong> 10.2887, 123.9035</div>
+              <div class="coords"><strong>Coordinates:</strong> 10.2921803, 123.9059101</div>
             </div>
           </article>
 
@@ -254,7 +246,6 @@
             </div>
           </article>
         </section>
-
       </section>
     </main>
     <dialog class="streetview-modal" id="streetview-modal">
@@ -284,9 +275,6 @@
             <p class="streetview-modal__text" id="streetview-status">
               Loading Google Street View for this landmark.
             </p>
-            <p class="streetview-modal__note">
-              Google Street View embedding requires an API key for full interactivity. Use "Open in Google Maps" to view Street View directly on Google Maps.
-            </p>
             <div class="streetview-modal__actions">
               <button class="btn btn--ghost" id="streetview-map-btn" type="button">Show on Map</button>
               <a class="btn" href="#" id="streetview-open-link" rel="noreferrer" target="_blank">Open in Google Maps</a>
@@ -295,8 +283,8 @@
         </div>
       </div>
     </dialog>
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script>
-      // ─── Landmark data ────────────────────────────────────────────────────────
       const landmarkCards = [...document.querySelectorAll(".card[data-name]")];
       const panel = document.getElementById("landmark-panel");
       const panelName = panel.querySelector(".viewer__name");
@@ -311,7 +299,6 @@
       const modalMapButton = document.getElementById("streetview-map-btn");
       const modalOpenLink = document.getElementById("streetview-open-link");
       const modalClose = document.getElementById("streetview-close");
-      const mapIframe = document.getElementById("map");
       let activeLandmark = null;
       let loadTimer = null;
 
@@ -322,19 +309,7 @@
           .join(" ");
         const lat = card.dataset.lat;
         const lng = card.dataset.lng;
-
-        // Google Maps embed URL — shows the location on a standard map
-        const googleMapsEmbedUrl =
-          `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY` +
-          `&q=${encodeURIComponent(card.dataset.name || title)}` +
-          `&center=${lat},${lng}&zoom=18&maptype=satellite`;
-
-        // Google Maps Street View embed URL
-        const streetViewEmbedUrl =
-          `https://www.google.com/maps/embed/v1/streetview?key=YOUR_GOOGLE_MAPS_API_KEY` +
-          `&location=${lat},${lng}&heading=0&pitch=0&fov=80`;
-
-        // Fallback: open Google Maps Street View in a new tab (no API key needed)
+        const streetViewEmbedUrl = `https://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}&cbp=11,0,0,0,0&output=svembed`;
         const googleMapsOpenUrl =
           `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
 
@@ -346,31 +321,23 @@
           lat: Number(lat),
           description,
           image: card.dataset.image,
-          googleMapsEmbedUrl,
           streetViewEmbedUrl,
           googleMapsOpenUrl
         };
       });
 
-      // ─── Map iframe helper ────────────────────────────────────────────────────
-      // Builds a no-API-key Google Maps embed showing a search pin for the landmark.
-      // The Embed API's basic iframe (no key) supports the ?pb= format.
-      function buildMapEmbedUrl(landmark) {
-        // This variant works without an API key and shows a satellite/hybrid view
-        // centered on the landmark with a search marker.
-        const q = encodeURIComponent(landmark.name + " Cebu Philippines");
-        return (
-          `https://www.google.com/maps?q=${q}` +
-          `&ll=${landmark.lat},${landmark.lng}` +
-          `&z=18&t=h&output=embed`
-        );
-      }
+      const map = new maplibregl.Map({
+        container: "map",
+        style: "https://tiles.openfreemap.org/styles/liberty",
+        center: [123.915, 10.296],
+        zoom: 12.4,
+        pitch: 58,
+        bearing: -18,
+        antialias: true
+      });
 
-      function focusMap(landmark) {
-        mapIframe.src = buildMapEmbedUrl(landmark);
-      }
+      map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-      // ─── Active card highlight ────────────────────────────────────────────────
       function setActiveCard(activeCard) {
         landmarkCards.forEach((card) => {
           card.classList.toggle("card--active", card === activeCard);
@@ -384,12 +351,18 @@
       }
 
       function focusLandmark(landmark, card) {
-        focusMap(landmark);
+        map.flyTo({
+          center: [landmark.lng, landmark.lat],
+          zoom: 17.2,
+          pitch: 70,
+          bearing: 15,
+          speed: 0.75,
+          essential: true
+        });
         updatePanel(landmark);
         setActiveCard(card);
       }
 
-      // ─── Street View modal ────────────────────────────────────────────────────
       function clearStreetviewTimer() {
         if (loadTimer) {
           window.clearTimeout(loadTimer);
@@ -404,12 +377,8 @@
         modalImage.src = landmark.image;
         modalImage.alt = landmark.name;
         modalStatus.textContent = "Loading Google Street View for this landmark.";
-        // Link opens Google Maps Street View in a new tab (works without API key)
         modalOpenLink.href = landmark.googleMapsOpenUrl;
-        // Embed Street View — requires a real API key in streetViewEmbedUrl.
-        // Without a key the iframe shows an error tile, so we show the no-key
-        // Google Maps search embed as a visual fallback instead.
-        modalFrame.src = buildMapEmbedUrl(landmark);
+        modalFrame.src = landmark.streetViewEmbedUrl;
         setActiveCard(card);
 
         if (!modal.open) {
@@ -418,8 +387,7 @@
 
         clearStreetviewTimer();
         loadTimer = window.setTimeout(() => {
-          modalStatus.textContent =
-            "Map loaded. For interactive Street View, replace YOUR_GOOGLE_MAPS_API_KEY in the code, or tap 'Open in Google Maps' to view Street View directly.";
+          modalStatus.textContent = "If the viewer stays blank, open in Google Maps.";
         }, 1800);
       }
 
@@ -431,8 +399,7 @@
 
       modalFrame.addEventListener("load", () => {
         clearStreetviewTimer();
-        modalStatus.textContent =
-          "Google Maps loaded. Tap 'Open in Google Maps' for Street View, or replace YOUR_GOOGLE_MAPS_API_KEY for embedded Street View.";
+        modalStatus.textContent = "Street View loaded. If it doesn't display, open in Google Maps.";
       });
 
       modalMapButton.addEventListener("click", () => {
@@ -450,7 +417,6 @@
         }
       });
 
-      // ─── Card buttons ─────────────────────────────────────────────────────────
       landmarkCards.forEach((card, index) => {
         const streetviewButton = card.querySelector(".js-open-streetview");
         const mapButton = card.querySelector(".js-focus-map");
@@ -465,10 +431,83 @@
         });
       });
 
-      // ─── Init: load first landmark on the map ─────────────────────────────────
-      if (landmarks.length > 0 && landmarkCards.length > 0) {
-        focusLandmark(landmarks[0], landmarkCards[0]);
-      }
+      map.once("load", () => {
+        const features = landmarks.map((landmark) => ({
+          type: "Feature",
+          properties: {
+            id: landmark.id,
+            name: landmark.name,
+            place: landmark.place,
+            color: landmark.id % 2 === 0 ? "#06b6d4" : "#7c3aed"
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [landmark.lng, landmark.lat]
+          }
+        }));
+
+        map.addSource("landmarks", {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features
+          }
+        });
+
+        map.addLayer({
+          id: "landmark-dots",
+          type: "circle",
+          source: "landmarks",
+          paint: {
+            "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 7, 16, 14],
+            "circle-color": ["get", "color"],
+            "circle-stroke-width": 3,
+            "circle-stroke-color": "#ffffff",
+            "circle-opacity": 0.92
+          }
+        });
+
+        map.addLayer({
+          id: "landmark-labels",
+          type: "symbol",
+          source: "landmarks",
+          layout: {
+            "text-field": ["get", "name"],
+            "text-size": 12,
+            "text-offset": [0, 1.6],
+            "text-anchor": "top"
+          },
+          paint: {
+            "text-color": "#0f172a",
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 1.2
+          }
+        });
+
+        map.on("click", "landmark-dots", (event) => {
+          const feature = event.features && event.features[0];
+          if (!feature) return;
+          const landmarkId = Number(feature.properties.id);
+          const landmark = landmarks.find((entry) => entry.id === landmarkId);
+          const card = landmark ? landmarkCards[landmarkId - 1] : null;
+          if (landmark && card) {
+            focusLandmark(landmark, card);
+            card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        });
+
+        map.on("mouseenter", "landmark-dots", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "landmark-dots", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+        if (landmarks.length > 0 && landmarkCards.length > 0) {
+          focusLandmark(landmarks[0], landmarkCards[0]);
+        }
+      });
     </script>
   </body>
 </html>

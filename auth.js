@@ -170,7 +170,7 @@ const AuthDB = (() => {
             return;
         }
 
-        window.location.href = 'index.html';
+        window.location.href = 'dashboard.html';
     });
 
     function showLoginError(message, field) {
@@ -308,6 +308,6 @@ const AuthDB = (() => {
             return;
         }
 
-        window.location.href = 'index.html';
+        window.location.href = 'dashboard.html';
     });
 })();

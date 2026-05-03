@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/sunrise.gif') center/cover no-repeat;
+    overflow-x: hidden;
+    font-family: 'Press Start 2P', system-ui;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 0;
+}
+
+.profile-rank i {
+    margin-right: 7px;
+}
+
+#username {
+    margin-top: 5px;
+}
+
+#sidebar, .main {
+    position: relative;
+    z-index: 1;
+}
+
+.main {
+    flex: 1;
+    margin-left: 240px;
+    padding: 20px;
+    color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+    font-size: 12px;
+    color: white;
+}
+
+.profile-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 15px;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+.profile-joined {
+    margin-top: 5px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatar-fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    color: gold;
+    font-size: 28px;
+}
+
+.avatar-fallback i {
+    color: orange;
+}
+
+.profile-info h4 {
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.profile-info p,
+.profile-info span {
+    font-size: 9px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.stat {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+}
+
+.stat-value {
+    font-size: 10px;
+}
+
+.stat-label {
+    font-size: 7px;
+}
+
+.progress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.progress-card {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.progress-label,
+.progress-percent {
+    font-size: 10px;
+}
+
+.progress-sub {
+    font-size: 8px;
+    margin-top: 6px;
+}
+
+.progress-bar-wrap {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: var(--pct);
+    background: orange;
+    border-radius: 10px;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.badge-card {
+    padding: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.badge-icon {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.badge-name {
+    font-size: 9px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.badge-desc {
+    font-size: 7px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.badge-card.locked {
+    opacity: 0.4;
+}
+
+h1, h2, h3, h4, p, span {
+    color: white;
+}
