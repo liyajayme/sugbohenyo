@@ -4,11 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Historical Landmarks of Cebu — Brochure</title>
-    <link rel="stylesheet" href="streetview.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+    <link rel="stylesheet" href="./streetview.css" />
   </head>
   <body>
-    <div id="sidebar"></div>
-
     <main class="page">
       <section class="sheet" aria-label="Cebu heritage brochure">
         <header class="top">
@@ -18,10 +17,10 @@
 
           <div class="top__grid">
             <div class="top__copy">
-              <h1 class="title-street">Historical Landmarks of Cebu</h1>
+              <h1 class="title">Historical Landmarks of Cebu</h1>
               <p class="lede">
                 Cebu—often called the “Cradle of Christianity”—is packed with heritage sites that shaped Philippine history.
-                Here are five landmark stops with quick facts and Street View previews.
+                Here are five landmark stops with quick facts, Google Street View links, and an interactive Google Maps embed.
               </p>
 
               <div class="atglance" aria-label="At a glance">
@@ -35,12 +34,12 @@
                 </div>
                 <div class="stat">
                   <div class="stat__k">Preview</div>
-                  <div class="stat__v">Street View</div>
+                  <div class="stat__v">Street-level</div>
                 </div>
               </div>
 
               <p class="hint">
-                Tip: Open the Street View link on each card to preview the location before your trip.
+                Tip: Use the "Street View" button on each card to open Google Street View for that landmark directly inside the page.
               </p>
             </div>
 
@@ -67,8 +66,27 @@
           </div>
         </header>
 
+        <section class="viewer" aria-label="3D map viewer">
+          <div class="viewer__intro">
+            <div>
+              <div class="viewer__eyebrow">Interactive Preview</div>
+              <h2 class="viewer__title">3D Map</h2>
+              <p class="viewer__text">
+                A 3D map centered on Cebu's heritage sites. Click any card's Map button to fly to a landmark.
+              </p>
+            </div>
+            <div class="viewer__panel" id="landmark-panel">
+              <div class="viewer__label">Selected landmark</div>
+              <h3 class="viewer__name">Fort San Pedro</h3>
+              <p class="viewer__meta">Cebu City</p>
+              <p class="viewer__desc">Tap any "Map" button below to fly to a landmark. The "Street View" button opens Google Street View inside the page.</p>
+            </div>
+          </div>
+          <div id="map" class="map" role="img" aria-label="Interactive 3D map of Cebu heritage landmarks"></div>
+        </section>
+
         <section class="cards" aria-label="Landmarks list">
-          <article class="card">
+          <article class="card" data-name="Fort San Pedro" data-place="Cebu City" data-lng="123.9059101" data-lat="10.2921803" data-image="./images/fort1.png">
             <div class="card__head">
               <div class="card__num">01</div>
               <h2 class="card__title">Fort San Pedro <span class="card__place">(Cebu City)</span></h2>
@@ -93,12 +111,15 @@
               </p>
             </div>
             <div class="card__foot">
-              <a class="btn" href="https://www.google.com/maps/@10.2921803,123.9059101,3a,75y,11.11h,92.73t/data=!3m6!1e1!3m4!1sgtUm4kDCSK3WTDnEqbeT-A!2e0!7i16384!8i8192?entry=ttu">Street View</a>
-              <div class="coords"><strong>Coordinates:</strong> 10.2887, 123.9035</div>
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
+              <div class="coords"><strong>Coordinates:</strong> 10.2921803, 123.9059101</div>
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-name="Basilica Minore del Santo Niño" data-place="Cebu City" data-lng="123.9025019" data-lat="10.2940225" data-image="./images/stnino1.png">
             <div class="card__head">
               <div class="card__num">02</div>
               <h2 class="card__title">Basilica Minore del Santo Niño <span class="card__place">(Cebu City)</span></h2>
@@ -123,12 +144,15 @@
               </p>
             </div>
             <div class="card__foot">
-              <a class="btn" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=10.2940225,123.9025019">Street View</a>
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
               <div class="coords"><strong>Coordinates:</strong> 10.2940225, 123.9025019</div>
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-name="Magellan's Cross" data-place="Cebu City" data-lng="123.901869" data-lat="10.293419" data-image="./images/mag2.png">
             <div class="card__head">
               <div class="card__num">03</div>
               <h2 class="card__title">Magellan’s Cross <span class="card__place">(Cebu City)</span></h2>
@@ -151,12 +175,15 @@
               </p>
             </div>
             <div class="card__foot">
-              <a class="btn" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=10.293419,123.901869">Street View</a>
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
               <div class="coords"><strong>Coordinates:</strong> 10.293419, 123.901869</div>
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-name="Mactan Shrine" data-place="Lapu-Lapu City" data-lng="123.9488" data-lat="10.3127" data-image="./images/mctan1.png">
             <div class="card__head">
               <div class="card__num">04</div>
               <h2 class="card__title">Mactan Shrine <span class="card__place">(Lapu-Lapu City)</span></h2>
@@ -180,12 +207,15 @@
               </p>
             </div>
             <div class="card__foot">
-              <a class="btn" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=10.3127,123.9488">Street View</a>
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
               <div class="coords"><strong>Coordinates:</strong> 10.3127, 123.9488</div>
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-name="Heritage of Cebu Monument" data-place="Parian, Cebu City" data-lng="123.903639" data-lat="10.29889" data-image="./images/heritege.png">
             <div class="card__head">
               <div class="card__num">05</div>
               <h2 class="card__title">Heritage of Cebu Monument <span class="card__place">(Parian, Cebu City)</span></h2>
@@ -208,15 +238,277 @@
               </p>
             </div>
             <div class="card__foot">
-              <a class="btn" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=10.29889,123.903639">Street View</a>
+              <div class="card__actions">
+                <button class="btn js-open-streetview" type="button">Open Street View</button>
+                <button class="btn btn--ghost js-focus-map" type="button">Map</button>
+              </div>
               <div class="coords"><strong>Coordinates:</strong> 10.29889, 123.903639</div>
             </div>
           </article>
         </section>
-
       </section>
     </main>
+    <dialog class="streetview-modal" id="streetview-modal">
+      <div class="streetview-modal__dialog">
+        <div class="streetview-modal__head">
+          <div>
+            <div class="streetview-modal__eyebrow">Google Street View</div>
+            <h2 class="streetview-modal__title" id="streetview-title">Landmark viewer</h2>
+            <p class="streetview-modal__meta" id="streetview-meta">Cebu City</p>
+          </div>
+          <button class="streetview-modal__close" id="streetview-close" type="button" aria-label="Close street view popup">Close</button>
+        </div>
 
-    <script src="sidebar.js"></script>
+        <div class="streetview-modal__body">
+          <div class="streetview-modal__viewer">
+            <iframe
+              class="streetview-modal__frame"
+              id="streetview-frame"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Street View"
+            ></iframe>
+          </div>
+
+          <aside class="streetview-modal__fallback">
+            <img class="streetview-modal__image" id="streetview-image" alt="" />
+            <p class="streetview-modal__text" id="streetview-status">
+              Loading Google Street View for this landmark.
+            </p>
+            <div class="streetview-modal__actions">
+              <button class="btn btn--ghost" id="streetview-map-btn" type="button">Show on Map</button>
+              <a class="btn" href="#" id="streetview-open-link" rel="noreferrer" target="_blank">Open in Google Maps</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </dialog>
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script>
+      const landmarkCards = [...document.querySelectorAll(".card[data-name]")];
+      const panel = document.getElementById("landmark-panel");
+      const panelName = panel.querySelector(".viewer__name");
+      const panelMeta = panel.querySelector(".viewer__meta");
+      const panelDesc = panel.querySelector(".viewer__desc");
+      const modal = document.getElementById("streetview-modal");
+      const modalTitle = document.getElementById("streetview-title");
+      const modalMeta = document.getElementById("streetview-meta");
+      const modalFrame = document.getElementById("streetview-frame");
+      const modalImage = document.getElementById("streetview-image");
+      const modalStatus = document.getElementById("streetview-status");
+      const modalMapButton = document.getElementById("streetview-map-btn");
+      const modalOpenLink = document.getElementById("streetview-open-link");
+      const modalClose = document.getElementById("streetview-close");
+      let activeLandmark = null;
+      let loadTimer = null;
+
+      const landmarks = landmarkCards.map((card, index) => {
+        const title = card.querySelector(".card__title").childNodes[0].textContent.trim();
+        const description = [...card.querySelectorAll(".p")]
+          .map((p) => p.textContent.trim())
+          .join(" ");
+        const lat = card.dataset.lat;
+        const lng = card.dataset.lng;
+        const streetViewEmbedUrl = `https://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}&cbp=11,0,0,0,0&output=svembed`;
+        const googleMapsOpenUrl =
+          `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+
+        return {
+          id: index + 1,
+          name: card.dataset.name || title,
+          place: card.dataset.place,
+          lng: Number(lng),
+          lat: Number(lat),
+          description,
+          image: card.dataset.image,
+          streetViewEmbedUrl,
+          googleMapsOpenUrl
+        };
+      });
+
+      const map = new maplibregl.Map({
+        container: "map",
+        style: "https://tiles.openfreemap.org/styles/liberty",
+        center: [123.915, 10.296],
+        zoom: 12.4,
+        pitch: 58,
+        bearing: -18,
+        antialias: true
+      });
+
+      map.addControl(new maplibregl.NavigationControl(), "top-right");
+
+      function setActiveCard(activeCard) {
+        landmarkCards.forEach((card) => {
+          card.classList.toggle("card--active", card === activeCard);
+        });
+      }
+
+      function updatePanel(landmark) {
+        panelName.textContent = landmark.name;
+        panelMeta.textContent = landmark.place;
+        panelDesc.textContent = landmark.description;
+      }
+
+      function focusLandmark(landmark, card) {
+        map.flyTo({
+          center: [landmark.lng, landmark.lat],
+          zoom: 17.2,
+          pitch: 70,
+          bearing: 15,
+          speed: 0.75,
+          essential: true
+        });
+        updatePanel(landmark);
+        setActiveCard(card);
+      }
+
+      function clearStreetviewTimer() {
+        if (loadTimer) {
+          window.clearTimeout(loadTimer);
+          loadTimer = null;
+        }
+      }
+
+      function openStreetview(landmark, card) {
+        activeLandmark = { landmark, card };
+        modalTitle.textContent = landmark.name;
+        modalMeta.textContent = landmark.place;
+        modalImage.src = landmark.image;
+        modalImage.alt = landmark.name;
+        modalStatus.textContent = "Loading Google Street View for this landmark.";
+        modalOpenLink.href = landmark.googleMapsOpenUrl;
+        modalFrame.src = landmark.streetViewEmbedUrl;
+        setActiveCard(card);
+
+        if (!modal.open) {
+          modal.showModal();
+        }
+
+        clearStreetviewTimer();
+        loadTimer = window.setTimeout(() => {
+          modalStatus.textContent = "If the viewer stays blank, open in Google Maps.";
+        }, 1800);
+      }
+
+      function closeStreetview() {
+        clearStreetviewTimer();
+        modal.close();
+        modalFrame.src = "about:blank";
+      }
+
+      modalFrame.addEventListener("load", () => {
+        clearStreetviewTimer();
+        modalStatus.textContent = "Street View loaded. If it doesn't display, open in Google Maps.";
+      });
+
+      modalMapButton.addEventListener("click", () => {
+        if (!activeLandmark) return;
+        focusLandmark(activeLandmark.landmark, activeLandmark.card);
+        closeStreetview();
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+
+      modalClose.addEventListener("click", closeStreetview);
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeStreetview();
+        }
+      });
+
+      landmarkCards.forEach((card, index) => {
+        const streetviewButton = card.querySelector(".js-open-streetview");
+        const mapButton = card.querySelector(".js-focus-map");
+
+        streetviewButton.addEventListener("click", () => {
+          openStreetview(landmarks[index], card);
+        });
+
+        mapButton.addEventListener("click", () => {
+          focusLandmark(landmarks[index], card);
+          document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      });
+
+      map.once("load", () => {
+        const features = landmarks.map((landmark) => ({
+          type: "Feature",
+          properties: {
+            id: landmark.id,
+            name: landmark.name,
+            place: landmark.place,
+            color: landmark.id % 2 === 0 ? "#06b6d4" : "#7c3aed"
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [landmark.lng, landmark.lat]
+          }
+        }));
+
+        map.addSource("landmarks", {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features
+          }
+        });
+
+        map.addLayer({
+          id: "landmark-dots",
+          type: "circle",
+          source: "landmarks",
+          paint: {
+            "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 7, 16, 14],
+            "circle-color": ["get", "color"],
+            "circle-stroke-width": 3,
+            "circle-stroke-color": "#ffffff",
+            "circle-opacity": 0.92
+          }
+        });
+
+        map.addLayer({
+          id: "landmark-labels",
+          type: "symbol",
+          source: "landmarks",
+          layout: {
+            "text-field": ["get", "name"],
+            "text-size": 12,
+            "text-offset": [0, 1.6],
+            "text-anchor": "top"
+          },
+          paint: {
+            "text-color": "#0f172a",
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 1.2
+          }
+        });
+
+        map.on("click", "landmark-dots", (event) => {
+          const feature = event.features && event.features[0];
+          if (!feature) return;
+          const landmarkId = Number(feature.properties.id);
+          const landmark = landmarks.find((entry) => entry.id === landmarkId);
+          const card = landmark ? landmarkCards[landmarkId - 1] : null;
+          if (landmark && card) {
+            focusLandmark(landmark, card);
+            card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        });
+
+        map.on("mouseenter", "landmark-dots", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "landmark-dots", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+        if (landmarks.length > 0 && landmarkCards.length > 0) {
+          focusLandmark(landmarks[0], landmarkCards[0]);
+        }
+      });
+    </script>
   </body>
 </html>
+
