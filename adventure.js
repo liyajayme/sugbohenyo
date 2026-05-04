@@ -1,5 +1,5 @@
 var municipalities = [
-  { name:"Daanbantayan", slug:"daanbantayan", x:58.1, y:8 },
+  { name:"Bantayan", slug:"bantayan", x:38, y:9 },
   { name:"Medellin", slug:"medellin", x:55.8, y:11.5 },
   { name:"Bogo City", slug:"bogo-city", x:56, y:17 },
   { name:"Tabogon", slug:"tabogon", x:57.3, y:21.2 },
