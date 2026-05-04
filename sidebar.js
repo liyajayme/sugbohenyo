@@ -1,4 +1,4 @@
-fetch('sidebar.html')
+fetch('/sugbohenyo/sidebar.html')
   .then(res => res.text())
   .then(data => {
     document.getElementById('sidebar').innerHTML = data;
@@ -17,7 +17,7 @@ fetch('sidebar.html')
 
 document.addEventListener('click', (e) => {
   if (e.target.closest('#logout-btn')) {
-    AuthDB.logout();
-    window.location.href = 'login.html';
+    fetch('/api/logout');
+    window.location.href = '/login';
   }
 });

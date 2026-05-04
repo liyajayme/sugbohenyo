@@ -6,16 +6,16 @@ class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');
-        this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
-        this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/badian/bg_badian.png');
-        this.load.image('grass', 'assets/oslob/oslob_ground.png');
+        this.load.image('rajahH_idle', '/sugbohenyo/games/assets/rajahH/rajahH.png');
+        this.load.image('rajahH_walk', '/sugbohenyo/games/assets/rajahH/rajahH_walk.png');
+        this.load.image('rajahH_jump', '/sugbohenyo/games/assets/rajahH/rajahH_jump.png');
+        this.load.image('bg', '/sugbohenyo/games/assets/badian/bg_badian.png');
+        this.load.image('grass', '/sugbohenyo/games/assets/oslob/oslob_ground.png');
         
-        this.load.image('fish', 'assets/bantayan/fish.png');
-        this.load.image('egg', 'assets/bantayan/egg.png');
-        this.load.image('wood', 'assets/bantayan/wood.png');
-        this.load.image('trash', 'assets/bantayan/trash.png');
+        this.load.image('fish', '/sugbohenyo/games/assets/bantayan/fish.png');
+        this.load.image('egg', '/sugbohenyo/games/assets/bantayan/egg.png');
+        this.load.image('wood', '/sugbohenyo/games/assets/bantayan/wood.png');
+        this.load.image('trash', '/sugbohenyo/games/assets/bantayan/trash.png');
 
     }
 
@@ -245,7 +245,7 @@ class MainScene extends Phaser.Scene {
         this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width, height, checkLeft, checkRight, checkUp, checkDown) 
         
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 
@@ -319,7 +319,7 @@ class GameOverScene extends Phaser.Scene {
             this.scene.start('MainScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 }
@@ -358,7 +358,7 @@ class EndScene extends Phaser.Scene {
             this.scene.start('MainScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 }
