@@ -52,7 +52,7 @@ municipalities.forEach(function(m) {
   dot.style.top = m.y + "%";
 
   dot.onclick = function() {
-    window.location.href = "games/" + m.slug + ".html";
+    window.location.href = "games/" + m.slug;
   };
 
   dot.addEventListener("mouseenter", function() {
@@ -73,7 +73,7 @@ municipalities.forEach(function(m) {
 
   var li = document.createElement("li");
   var a = document.createElement("a");
-  a.href = "games/" + m.slug + ".html";
+  a.href = "games/" + m.slug;
   a.innerText = m.name;
   li.appendChild(a);
   muniList.appendChild(li);

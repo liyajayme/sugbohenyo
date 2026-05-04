@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sugbo Henyo Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="sidebar.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/sugbohenyo/sidebar.css">
+    <link rel="stylesheet" href="/sugbohenyo/dashboard.css">
 </head>
 
 <body>
@@ -92,18 +92,6 @@
 
                 <div class="progress-card">
                     <div class="progress-card-top">
-                        <span class="progress-label">4 Pics 1 Word</span>
-                        <span class="progress-percent teal">30%</span>
-                    </div>
-
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar teal" style="--pct: 30%"></div>
-                    </div>
-                    <p class="progress-sub">6 of 20 puzzles solved</p>
-                </div>
-
-                <div class="progress-card">
-                    <div class="progress-card-top">
                         <span class="progress-label">Locations Explored</span>
                         <span class="progress-percent coral">33%</span>
                     </div>
@@ -173,13 +161,10 @@
         </section>
 
     </main>
-
-    <script src="auth.js"></script>
-    <script>
-        AuthDB.requireAuth('login.html');
-    </script>
-    <script src="sidebar.js"></script>
-    <script src="dashboard.js"></script>
+    <script src="../dash.js"></script>
+    <script src="../app.js"></script>
+    <script src="/sugbohenyo/sidebar.js"></script>
+    <script src="/sugbohenyo/dashboard.js"></script>
 </body>
 
 </html>>

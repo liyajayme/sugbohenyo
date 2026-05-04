@@ -6,19 +6,19 @@ class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');
-        this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
-        this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/oslob/bg_oslob.png');
-        this.load.image('grass', 'assets/oslob/oslob_ground.png');
-        this.load.image('xs_log', 'assets/logs/xs_log.png');
-        this.load.image('s_log', 'assets/logs/s_log.png');
-        this.load.image('med_log', 'assets/logs/med_log.png');
-        this.load.image('l_log', 'assets/logs/l_log.png');
-        this.load.image('ruins', 'assets/oslob/oslob_watchtower.png');
-        this.load.image('pearl', 'assets/pre-colonial/pearl.png');
-        this.load.image('enemy_walk1', 'assets/crab/crab1.png');
-        this.load.image('enemy_walk2', 'assets/crab/crab2.png');
+        this.load.image('rajahH_idle', '/sugbohenyo/games/assets/rajahH/rajahH.png');
+        this.load.image('rajahH_walk', '/sugbohenyo/games/assets/rajahH/rajahH_walk.png');
+        this.load.image('rajahH_jump', '/sugbohenyo/games/assets/rajahH/rajahH_jump.png');
+        this.load.image('bg', '/sugbohenyo/games/assets/oslob/bg_oslob.png');
+        this.load.image('grass', '/sugbohenyo/games/assets/oslob/oslob_ground.png');
+        this.load.image('xs_log', '/sugbohenyo/games/assets/logs/xs_log.png');
+        this.load.image('s_log', '/sugbohenyo/games/assets/logs/s_log.png');
+        this.load.image('med_log', '/sugbohenyo/games/assets/logs/med_log.png');
+        this.load.image('l_log', '/sugbohenyo/games/assets/logs/l_log.png');
+        this.load.image('ruins', '/sugbohenyo/games/assets/oslob/oslob_watchtower.png');
+        this.load.image('pearl', '/sugbohenyo/games/assets/pre-colonial/pearl.png');
+        this.load.image('enemy_walk1', '/sugbohenyo/games/assets/crab/crab1.png');
+        this.load.image('enemy_walk2', '/sugbohenyo/games/assets/crab/crab2.png');
     }
 
     showDialogue() {
@@ -388,7 +388,7 @@ class MainScene extends Phaser.Scene {
         this.maxReachedX = this.player.x; // keeps track of the furthest horizontal position the player has reached, used to prevent the camera from moving back to areas the player has already passed
         this.prevCamX = 0;
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 
@@ -539,7 +539,7 @@ class GameOverScene extends Phaser.Scene {
             this.scene.start('MainScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 }
@@ -578,7 +578,7 @@ class EndScene extends Phaser.Scene {
             this.scene.start('MainScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 }
