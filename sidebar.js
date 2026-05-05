@@ -15,9 +15,17 @@ fetch('/sugbohenyo/sidebar.html')
     });
   });
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
   if (e.target.closest('#logout-btn')) {
-    fetch('/api/logout');
-    window.location.href = '/login';
+    try {
+      const response = await fetch('/api/logout', { method: 'POST' });
+      if (response.ok) {
+        window.location.href = '/login';
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }
 });
