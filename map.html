@@ -521,7 +521,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="/sugbohenyo/sidebar.js"></script>
+    
+    <script src="/sugbohenyo/widget.js"></script>
+
     <script>
+        let selectedCityName = '';
         // Initialize Map centered on Cebu
         const map = L.map('map').setView([10.3157, 123.8854], 10);
 
@@ -535,8 +539,10 @@
 
         citySelector.addEventListener('change', function () {
             const val = this.value;
+            selectedCityName = name;
             if (!val) {
                 infoCard.style.display = 'none';
+                selectedCityName = '';
                 return;
             }
 
@@ -549,6 +555,10 @@
             const items = selected.getAttribute('data-items').split(',');
             const imgSrc = selected.getAttribute('data-img');
             const videoUrl = selected.getAttribute('data-video');
+
+            selectedCityName = name;
+            console.log('City selected:', selectedCityName);
+            
             // 2. Zoom Map & Place Marker
             map.flyTo(coords, 15, { animate: true, duration: 1.5 });
 
@@ -573,6 +583,22 @@
 
             // 5. Show the Card
             infoCard.style.display = 'block';
+
+            // 6. Update AI Widget with selected city
+            if (typeof ItineraryWidget !== 'undefined' && selectedCityName) {
+                ItineraryWidget.setDestination(selectedCityName + ', Cebu');
+            }
+        });
+ 
+        
+        window.addEventListener('load', function() {
+            if (typeof ItineraryWidget !== 'undefined') {
+                ItineraryWidget.init({
+                    destination: selectedCityName ? selectedCityName + ', Cebu' : 'Cebu',
+                    apiEndpoint: '/promptItinerary',
+                    autoDetectDestination: false 
+                });
+            }
         });
     </script>
 </body>

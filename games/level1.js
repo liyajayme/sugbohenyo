@@ -1,16 +1,55 @@
+async function loadUser() {
+    const res = await fetch('/api/me', {
+    credentials: 'include'
+  });
+  const data = await res.json();
+  if(data.success === false){
+    window.location.href = '/login';
+    return;
+  }
+};
+loadUser();
+
+async function storeScore() {
+    console.log("ran storing")
+  const res = await fetch('/api/me', {
+    credentials: 'include'
+  });
+  const data = await res.json();
+
+  if(data.success === false){
+    window.location.href = '/login';
+    return;
+  }
+  console.log("sending to server");
+  // Fixed: Added await, fetch, and proper error handling
+  const storeRes = await fetch(`/api/storePoints/${data.uid}/${this.score}`, {
+    method: 'POST',
+    credentials: 'include'
+  });
+  const result = await storeRes.json();
+  console.log(result);
+  if (!storeRes.ok) {
+    console.error('Failed to store score:', result.error);
+    return;
+  }
+  
+  console.log('Score stored successfully:', result);
+}
+
 
 class StoryScene extends Phaser.Scene {
     constructor() { //constructor() is a special method for creating and initializing an object created with a class. In this case, it initializes the StoryScene class.
         super('StoryScene');
     }
 
-    preload() {  //load assets (key, path)
-        this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');   
-        this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
-        this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/pre-colonial/sky_bg.png');
-        this.load.image('tree', 'assets/pre-colonial/trees.png');
-        this.load.image('grass', 'assets/pre-colonial/grass.png');
+    preload() {  //load ./sugbohenyo/games/assets (key, path)
+        this.load.image('rajahH_idle', './sugbohenyo/games/assets/rajahH/rajahH.png');   
+        this.load.image('rajahH_walk', './sugbohenyo/games/assets/rajahH/rajahH_walk.png');
+        this.load.image('rajahH_jump', './sugbohenyo/games/assets/rajahH/rajahH_jump.png');
+        this.load.image('bg', './sugbohenyo/games/assets/pre-colonial/sky_bg.png');
+        this.load.image('tree', './sugbohenyo/games/assets/pre-colonial/trees.png');
+        this.load.image('grass', './sugbohenyo/games/assets/pre-colonial/grass.png');
     }
 
     create() {
@@ -54,7 +93,7 @@ class StoryScene extends Phaser.Scene {
 
         this.showLine(); // starts the process of showing the first line of dialogue with a typing effect
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            window.location.href = '/adventure';
         });
     }
 
@@ -106,23 +145,23 @@ class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('rajahH_idle', 'assets/rajahH/rajahH.png');
-        this.load.image('rajahH_walk', 'assets/rajahH/rajahH_walk.png');
-        this.load.image('rajahH_jump', 'assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', 'assets/pre-colonial/sky_bg.png');
-        this.load.image('tree', 'assets/pre-colonial/trees.png');
-        this.load.image('grass', 'assets/pre-colonial/grass.png');
-        this.load.image('xs_log', 'assets/logs/xs_log.png');
-        this.load.image('s_log', 'assets/logs/s_log.png');
-        this.load.image('med_log', 'assets/logs/med_log.png');
-        this.load.image('l_log', 'assets/logs/l_log.png');
-        this.load.image('kubo', 'assets/pre-colonial/bahaykubo.png');
-        this.load.image('spice', 'assets/pre-colonial/spice.png');
-        this.load.image('gold', 'assets/pre-colonial/gold.png');
-        this.load.image('honey', 'assets/pre-colonial/honey.png');
-        this.load.image('pearl', 'assets/pre-colonial/pearl.png');
-        this.load.image('enemy_walk1', 'assets/soldier/left_enemy.png');
-        this.load.image('enemy_walk2', 'assets/soldier/right_enemy.png');
+        this.load.image('rajahH_idle', './sugbohenyo/games/assets/rajahH/rajahH.png');
+        this.load.image('rajahH_walk', './sugbohenyo/games/assets/rajahH/rajahH_walk.png');
+        this.load.image('rajahH_jump', './sugbohenyo/games/assets/rajahH/rajahH_jump.png');
+        this.load.image('bg', './sugbohenyo/games/assets/pre-colonial/sky_bg.png');
+        this.load.image('tree', './sugbohenyo/games/assets/pre-colonial/trees.png');
+        this.load.image('grass', './sugbohenyo/games/assets/pre-colonial/grass.png');
+        this.load.image('xs_log', './sugbohenyo/games/assets/logs/xs_log.png');
+        this.load.image('s_log', './sugbohenyo/games/assets/logs/s_log.png');
+        this.load.image('med_log', './sugbohenyo/games/assets/logs/med_log.png');
+        this.load.image('l_log', './sugbohenyo/games/assets/logs/l_log.png');
+        this.load.image('kubo', './sugbohenyo/games/assets/pre-colonial/bahaykubo.png');
+        this.load.image('spice', './sugbohenyo/games/assets/pre-colonial/spice.png');
+        this.load.image('gold', './sugbohenyo/games/assets/pre-colonial/gold.png');
+        this.load.image('honey', './sugbohenyo/games/assets/pre-colonial/honey.png');
+        this.load.image('pearl', './sugbohenyo/games/assets/pre-colonial/pearl.png');
+        this.load.image('enemy_walk1', './sugbohenyo/games/assets/soldier/left_enemy.png');
+        this.load.image('enemy_walk2', './sugbohenyo/games/assets/soldier/right_enemy.png');
     }
 
     showDialogue() {
@@ -463,7 +502,8 @@ class MainScene extends Phaser.Scene {
         this.maxReachedX = this.player.x; // keeps track of the furthest horizontal position the player has reached, used to prevent the camera from moving back to areas the player has already passed
         this.prevCamX = 0;
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            storeScore();
+            window.location.href = '/adventure';
         });
     }
 
@@ -601,7 +641,8 @@ class GameOverScene extends Phaser.Scene {
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            storeScore();
+            window.location.href = '/adventure';
         });
     }
 }
@@ -641,7 +682,8 @@ class EndScene extends Phaser.Scene {
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            window.location.href = '../adventure.html';
+            storeScore();
+            window.location.href = '/adventure';
         });
     }
 }
