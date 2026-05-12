@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cebu Heritage Explorer</title>
-    <link rel="stylesheet" href="/sugbohenyo/sidebar.css">
+    <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="map.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
@@ -452,57 +452,64 @@
     </div>
 
     <div class="map-wrapper">
-    <div id="map-container">
-        <div id="map"></div>
-    </div>
 
-    <div id="infoCard" class="info-card">
-        <div id="cardMedia" class="card-media"></div>
-        <div class="card-header">
-            <h3 id="cardTitle">Municipality</h3>
-            <span id="cardTagline">Tagline</span>
+        <div id="map-container">
+            <div class="custom-zoom">
+                <button id="zoom-in">+</button>
+                <div class="zoom-divider"></div>
+                <button id="zoom-out">−</button>
+            </div>
+            <div id="map"></div>
         </div>
-        <div class="card-body">
-            <strong>History:</strong>
-            <p id="cardHistory"></p>
-            
-            <strong>Famous For:</strong>
-            <div id="cardTags" class="known-for"></div>
-            
-            <a id="videoLink" href="#" target="_blank" class="video-btn">
-                <span>▶</span> Watch Video
-            </a>
 
-            <div id="exploreSection">
-                <h3 id="exploreTitle">Do you wanna explore?</h3>
-                <div class="duration-container">
-                    <span class="duration-label">Trip Duration</span>
-                    <select id="durationSelect">
-                        <option value="1 Day Trip">1 Day Trip</option>
-                        <option value="2 Days, 1 Night">2 Days, 1 Night</option>
-                        <option value="3 Days, 2 Nights">3 Days, 2 Nights</option>
-                    </select>
+        <div id="infoCard" class="info-card">
+            <div id="cardMedia" class="card-media"></div>
+            <div class="card-header">
+                <h3 id="cardTitle">Municipality</h3>
+                <span id="cardTagline">Tagline</span>
+            </div>
+            <div class="card-body">
+                <strong>History:</strong>
+                <p id="cardHistory"></p>
+
+                <strong>Famous For:</strong>
+                <div id="cardTags" class="known-for"></div>
+
+                <a id="videoLink" href="#" target="_blank" class="video-btn">
+                    <span>▶</span> Watch Video
+                </a>
+
+                <div id="exploreSection">
+                    <h3 id="exploreTitle">Do you wanna explore?</h3>
+                    <div class="duration-container">
+                        <span class="duration-label">Trip Duration</span>
+                        <select id="durationSelect">
+                            <option value="1 Day Trip">1 Day Trip</option>
+                            <option value="2 Days, 1 Night">2 Days, 1 Night</option>
+                            <option value="3 Days, 2 Nights">3 Days, 2 Nights</option>
+                        </select>
+                    </div>
+                    <button id="generateItineraryBtn" class="generate-btn">
+                        Generate Itinerary
+                    </button>
                 </div>
-                <button id="generateItineraryBtn" class="generate-btn">
-                    Generate Itinerary
-                </button>
             </div>
+        </div>
+
+        <div id="itinerarySidebar" class="itinerary-sidebar">
+            <div class="itinerary-header">
+                <h2>Planned Trip</h2>
+            </div>
+            <div id="itineraryContent" class="itinerary-body">
+            </div>
+            <button onclick="closeItinerary()" class="close-btn">Close Itinerary</button>
         </div>
     </div>
 
-    <div id="itinerarySidebar" class="itinerary-sidebar">
-        <div class="itinerary-header">
-            <h2>Planned Trip</h2>
-        </div>
-        <div id="itineraryContent" class="itinerary-body">
-            </div>
-        <button onclick="closeItinerary()" class="close-btn">Close Itinerary</button>
-    </div>
-</div>
-
-    <script src="/sugbohenyo/sidebar.js"></script>
+    <script src="sidebar.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="map.js"></script>
 
 </body>
+
 </html>

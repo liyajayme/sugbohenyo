@@ -126,3 +126,11 @@ function closeItinerary() {
     // Pan map back to center
     map.panBy([-250, 0], { animate: true });
 }
+
+document.getElementById('zoom-in').onclick = function() {
+    map.zoomIn();
+};
+
+document.getElementById('zoom-out').onclick = function() {
+    map.zoomOut();
+};
