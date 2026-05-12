@@ -9,14 +9,15 @@ class MainScene extends Phaser.Scene {
         this.load.image('rajahH_idle', '/sugbohenyo/games/assets/rajahH/rajahH.png');
         this.load.image('rajahH_walk', '/sugbohenyo/games/assets/rajahH/rajahH_walk.png');
         this.load.image('rajahH_jump', '/sugbohenyo/games/assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', '/sugbohenyo/games/assets/badian/bg_badian.png');
+        this.load.image('bg', '/sugbohenyo/games/assets/carcar/bg_carcar.png');
         this.load.image('grass', '/sugbohenyo/games/assets/badian/badian_ground.png');
         this.load.image('xs_log', '/sugbohenyo/games/assets/logs/xs_log.png');
         this.load.image('s_log', '/sugbohenyo/games/assets/logs/s_log.png');
         this.load.image('med_log', '/sugbohenyo/games/assets/logs/med_log.png');
         this.load.image('l_log', '/sugbohenyo/games/assets/logs/l_log.png');
-        this.load.image('falls', '/sugbohenyo/games/assets/badian/waterfalls_badian.png');
-        this.load.image('banig', '/sugbohenyo/games/assets/badian/banig.png');
+        this.load.image('park', '/sugbohenyo/games/assets/talisay/liberationpark.png');
+        this.load.image('puso', '/sugbohenyo/games/assets/talisay/puso.png');
+        this.load.image('slice', '/sugbohenyo/games/assets/talisay/lechonslice.png');
         this.load.image('enemy', '/sugbohenyo/games/assets/snake/snake0.png');
         this.load.image('enemy_walk1', '/sugbohenyo/games/assets/snake/snake1.png');
         this.load.image('enemy_walk2', '/sugbohenyo/games/assets/snake/snake2.png');
@@ -101,8 +102,14 @@ class MainScene extends Phaser.Scene {
     }
 
 
-    collectBanig(player, banig) {
-        banig.disableBody(true, true);
+    collectPuso(player, puso) {
+        puso.disableBody(true, true);
+
+        this.score += 15;
+        this.scoreText.setText('Score: ' + this.score);
+    }
+    collectSlice(player, slice) {
+        slice.disableBody(true, true);
 
         this.score += 15;
         this.scoreText.setText('Score: ' + this.score);
@@ -227,16 +234,20 @@ class MainScene extends Phaser.Scene {
             platform.body.setOffset(5, 0);
         });
 
-        this.banig = this.physics.add.group({
+        this.puso = this.physics.add.group({
+            allowGravity: false
+        });
+        this.slice = this.physics.add.group({
             allowGravity: false
         });
 
-        this.banig.create(360, 100, 'banig').setScale(0.45);;
-        this.banig.create(900, 123, 'banig').setScale(0.45);
-        this.banig.create(990, 80, 'banig').setScale(0.45);
-        this.banig.create(990, 230, 'banig').setScale(0.45);
-        this.banig.create(1260, 120, 'banig').setScale(0.45);
-        this.banig.create(1580, 100, 'banig').setScale(0.45);
+        this.puso.create(360, 100, 'puso').setScale(0.04);;
+        this.slice.create(900, 123, 'slice').setScale(0.04);
+        this.puso.create(990, 80, 'puso').setScale(0.04);
+        this.slice.create(990, 230, 'slice').setScale(0.04);
+        this.puso.create(1260, 120, 'puso').setScale(0.04);
+        this.slice.create(1580, 100, 'slice').setScale(0.04);
+
 
         this.enemies = this.physics.add.group();
 
@@ -259,9 +270,9 @@ class MainScene extends Phaser.Scene {
         this.player.setCollideWorldBounds(true);
         this.physics.world.setBoundsCollision(true, true, true, false);
 
-        this.falls = this.physics.add.staticImage(1934, 200, 'falls');
-        this.falls.setScale(3);
-        this.falls.refreshBody();
+        this.park = this.physics.add.staticImage(1934, 195, 'park');
+        this.park.setScale(.18);
+        this.park.refreshBody();
 
         this.physics.add.collider(this.player, ground); // (object1, object2)
         this.physics.add.collider(this.player, this.platforms);
@@ -319,7 +330,8 @@ class MainScene extends Phaser.Scene {
 
         this.enemyFrames = ['enemy_walk1', 'enemy_walk2'];
 
-        this.physics.add.overlap(this.player, this.banig, this.collectBanig, null, this); // allows the player to collect banig items by overlapping with them, triggering the collectBanig callback function when the overlap occurs
+        this.physics.add.overlap(this.player, this.puso, this.collectPuso, null, this); // allows the player to collect banig items by overlapping with them, triggering the collectBanig callback function when the overlap occurs
+        this.physics.add.overlap(this.player, this.slice, this.collectSlice, null, this);
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
         this.physics.world.setBounds(0, 0, 2000, 288);
         this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width, height, checkLeft, checkRight, checkUp, checkDown) 

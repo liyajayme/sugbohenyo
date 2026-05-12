@@ -9,17 +9,17 @@ class MainScene extends Phaser.Scene {
         this.load.image('rajahH_idle', '/sugbohenyo/games/assets/rajahH/rajahH.png');
         this.load.image('rajahH_walk', '/sugbohenyo/games/assets/rajahH/rajahH_walk.png');
         this.load.image('rajahH_jump', '/sugbohenyo/games/assets/rajahH/rajahH_jump.png');
-        this.load.image('bg', '/sugbohenyo/games/assets/badian/bg_badian.png');
+        this.load.image('bg', '/sugbohenyo/games/assets/carcar/bg_carcar.png');
         this.load.image('grass', '/sugbohenyo/games/assets/badian/badian_ground.png');
-        this.load.image('xs_log', '/sugbohenyo/games/assets/logs/xs_log.png');
-        this.load.image('s_log', '/sugbohenyo/games/assets/logs/s_log.png');
-        this.load.image('med_log', '/sugbohenyo/games/assets/logs/med_log.png');
-        this.load.image('l_log', '/sugbohenyo/games/assets/logs/l_log.png');
-        this.load.image('falls', '/sugbohenyo/games/assets/badian/waterfalls_badian.png');
-        this.load.image('banig', '/sugbohenyo/games/assets/badian/banig.png');
-        this.load.image('enemy', '/sugbohenyo/games/assets/snake/snake0.png');
-        this.load.image('enemy_walk1', '/sugbohenyo/games/assets/snake/snake1.png');
-        this.load.image('enemy_walk2', '/sugbohenyo/games/assets/snake/snake2.png');
+        this.load.image('xs_log', '/sugbohenyo/games/assets/stones/xs_stone.png');
+        this.load.image('s_log', '/sugbohenyo/games/assets/stones/s_stone.png');
+        this.load.image('med_log', '/sugbohenyo/games/assets/stones/m_stone.png');
+        this.load.image('l_log', '/sugbohenyo/games/assets/stones/l_stone.png');
+        this.load.image('church', '/sugbohenyo/games/assets/carcar/church_carcar.png');
+        this.load.image('shoe', '/sugbohenyo/games/assets/carcar/shoes.png');
+
+        this.load.image('enemy_walk1', '/sugbohenyo/games/assets/soldier/left_enemy.png');
+        this.load.image('enemy_walk2', '/sugbohenyo/games/assets/soldier/right_enemy.png');
     }
 
     showDialogue() {
@@ -101,8 +101,8 @@ class MainScene extends Phaser.Scene {
     }
 
 
-    collectBanig(player, banig) {
-        banig.disableBody(true, true);
+    collectShoe(player, shoe) {
+        shoe.disableBody(true, true);
 
         this.score += 15;
         this.scoreText.setText('Score: ' + this.score);
@@ -177,9 +177,9 @@ class MainScene extends Phaser.Scene {
             // reward platform
             { x: 1600, y: 130, key: 'med_log', w: 53, h: 12 },
         ];
-        for (let x = 0; x < 3000; x += 325) { // creates a repeating background by adding multiple instances of the 'bg' image across the level, spaced 155 pixels apart
+        for (let x = 0; x < 3000; x += 580) { // creates a repeating background by adding multiple instances of the 'bg' image across the level, spaced 155 pixels apart
             let bg = this.add.image(x, 145, 'bg'); // (x, y, key) 
-            bg.setScale(5); // (scale) scales the background image to fit the desired size for the level, ensuring it covers the entire area without distortion
+            bg.setScale(4); // (scale) scales the background image to fit the desired size for the level, ensuring it covers the entire area without distortion
         }
 
         let ground = this.physics.add.staticGroup(); // creates a static physics group called 'ground' that will be used to create the ground tiles for the level, allowing the player to collide with them and walk on them
@@ -227,31 +227,31 @@ class MainScene extends Phaser.Scene {
             platform.body.setOffset(5, 0);
         });
 
-        this.banig = this.physics.add.group({
+        this.shoes = this.physics.add.group({
             allowGravity: false
         });
 
-        this.banig.create(360, 100, 'banig').setScale(0.45);;
-        this.banig.create(900, 123, 'banig').setScale(0.45);
-        this.banig.create(990, 80, 'banig').setScale(0.45);
-        this.banig.create(990, 230, 'banig').setScale(0.45);
-        this.banig.create(1260, 120, 'banig').setScale(0.45);
-        this.banig.create(1580, 100, 'banig').setScale(0.45);
+        this.shoes.create(360, 100, 'shoe').setScale(0.04);;
+        this.shoes.create(900, 123, 'shoe').setScale(0.04);
+        this.shoes.create(990, 80, 'shoe').setScale(0.04);
+        this.shoes.create(990, 230, 'shoe').setScale(0.04);
+        this.shoes.create(1260, 120, 'shoe').setScale(0.04);
+        this.shoes.create(1580, 100, 'shoe').setScale(0.04);
 
         this.enemies = this.physics.add.group();
 
-        let enemy1 = this.enemies.create(600, 220, 'enemy_walk1');
-        enemy1.setScale(.8);
+        let enemy1 = this.enemies.create(600, 200, 'enemy_walk1');
+        enemy1.setScale(.1);
         enemy1.setVelocityX(-90);
 
-        let enemy2 = this.enemies.create(900, 220, 'enemy_walk1');
-        enemy2.setScale(.8);
+        let enemy2 = this.enemies.create(900, 200, 'enemy_walk1');
+        enemy2.setScale(.1);
         enemy2.setVelocityX(-90);
         enemy2.minX = 950;
         enemy2.maxX = 1030;
 
-        let enemy3 = this.enemies.create(1390, 220, 'enemy_walk1');
-        enemy3.setScale(.8);
+        let enemy3 = this.enemies.create(1390, 200, 'enemy_walk1');
+        enemy3.setScale(.1);
         enemy3.setVelocityX(-90);
 
         this.player = this.physics.add.sprite(20, 130, 'rajahH_idle'); //(x, y, key)
@@ -259,9 +259,9 @@ class MainScene extends Phaser.Scene {
         this.player.setCollideWorldBounds(true);
         this.physics.world.setBoundsCollision(true, true, true, false);
 
-        this.falls = this.physics.add.staticImage(1934, 200, 'falls');
-        this.falls.setScale(3);
-        this.falls.refreshBody();
+        this.church = this.physics.add.staticImage(1938, 190, 'church');
+        this.church.setScale(4);
+        this.church.refreshBody();
 
         this.physics.add.collider(this.player, ground); // (object1, object2)
         this.physics.add.collider(this.player, this.platforms);
@@ -319,7 +319,7 @@ class MainScene extends Phaser.Scene {
 
         this.enemyFrames = ['enemy_walk1', 'enemy_walk2'];
 
-        this.physics.add.overlap(this.player, this.banig, this.collectBanig, null, this); // allows the player to collect banig items by overlapping with them, triggering the collectBanig callback function when the overlap occurs
+        this.physics.add.overlap(this.player, this.shoes, this.collectShoe, null, this); // allows the player to collect shoe items by overlapping with them, triggering the collectShoe callback function when the overlap occurs
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
         this.physics.world.setBounds(0, 0, 2000, 288);
         this.physics.world.setBoundsCollision(true, true, true, false); // (x, y, width, height, checkLeft, checkRight, checkUp, checkDown) 
