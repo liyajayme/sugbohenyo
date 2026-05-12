@@ -1,40 +1,40 @@
 async function loadUser() {
     const res = await fetch('/api/me', {
-    credentials: 'include'
-  });
-  const data = await res.json();
-  if(data.success === false){
-    window.location.href = '/login';
-    return;
-  }
+        credentials: 'include'
+    });
+    const data = await res.json();
+    if(data.success === false){
+        window.location.href = '/login';
+        return;
+    }
 };
 loadUser();
 
 async function storeScore() {
     console.log("ran storing")
-  const res = await fetch('/api/me', {
-    credentials: 'include'
-  });
-  const data = await res.json();
+    const res = await fetch('/api/me', {
+        credentials: 'include'
+    });
+    const data = await res.json();
 
-  if(data.success === false){
-    window.location.href = '/login';
-    return;
-  }
-  console.log("sending to server");
-  // Fixed: Added await, fetch, and proper error handling
-  const storeRes = await fetch(`/api/storePoints/${data.uid}/${this.score}`, {
-    method: 'POST',
-    credentials: 'include'
-  });
-  const result = await storeRes.json();
-  console.log(result);
-  if (!storeRes.ok) {
-    console.error('Failed to store score:', result.error);
-    return;
-  }
-  
-  console.log('Score stored successfully:', result);
+    if(data.success === false){
+        window.location.href = '/login';
+        return;
+    }
+    console.log("sending to server");
+    // Fixed: Added await, fetch, and proper error handling
+    const storeRes = await fetch(`/api/storePoints/${data.uid}/${this.score}`, {
+        method: 'POST',
+        credentials: 'include'
+    });
+    const result = await storeRes.json();
+    console.log(result);
+    if (!storeRes.ok) {
+        console.error('Failed to store score:', result.error);
+        return;
+    }
+    
+    console.log('Score stored successfully:', result);
 }
 
 
@@ -235,7 +235,10 @@ class MainScene extends Phaser.Scene {
 
         this.cameras.main.once('camerafadeoutcomplete', () => { // (event, callback)
             this.scene.stop(); // stop MainScene
-            this.scene.start('EndScene');
+            this.scene.start('QuizScene', {
+                score: this.score,
+                lives: this.lives
+            });
         });
     }
 
@@ -647,6 +650,285 @@ class GameOverScene extends Phaser.Scene {
     }
 }
 
+class QuizScene extends Phaser.Scene {
+    constructor() {
+        super('QuizScene');
+    }
+
+    init(data) {
+        this.score = data.score;
+        this.lives = data.lives;
+    }
+
+    create() {
+
+        this.cameras.main.fadeIn(500, 0, 0, 0);
+
+        this.questions = [
+            {
+                question: "Who ruled communities in pre-colonial Cebu?",
+                answers: ["Datus", "Governors", "Mayors"],
+                correct: 0
+            },
+            {
+                question: "What was Cebu known for?",
+                answers: ["Trading", "Factories", "Airplanes"],
+                correct: 0
+            },
+            {
+                question: "What traveled across the seas?",
+                answers: ["Cars", "Boats", "Trains"],
+                correct: 1
+            },
+            {
+                question: "Which items were traded?",
+                answers: ["Gold and spices", "Computers", "Oil"],
+                correct: 0
+            },
+            {
+                question: "Foreign traders were treated with?",
+                answers: ["Fear", "Respect", "Violence"],
+                correct: 1
+            }
+        ];
+
+        this.currentQuestion = 0;
+
+        this.livesText = this.add.text(10, 10,
+            'Lives: ' + this.lives,
+            {
+                fontSize: '16px',
+                fill: '#ffffff'
+            }
+        );
+
+        this.scoreText = this.add.text(60, 10,
+            'Score: ' + this.score,
+            {
+                fontSize: '16px',
+                fill: '#ffffff'
+            }
+        );
+
+        this.questionText = this.add.text( 
+            256,
+            70,
+            '',
+            {
+                fontSize: '20px',
+                fill: '#ffffff',
+                align: 'center',
+                wordWrap: { width: 450 }
+            }
+        ).setOrigin(0.5);
+
+        this.answerTexts = [];
+
+        for (let i = 0; i < 3; i++) {
+
+            let answer = this.add.text(
+                256,
+                140 + (i * 40),
+                '',
+                {
+                    fontSize: '18px',
+                    fill: '#ffff00',
+                    backgroundColor: '#000000',
+                    padding: {
+                        x: 10,
+                        y: 5
+                    }
+                }
+            ).setOrigin(0.5)
+             .setInteractive();
+
+            answer.on('pointerdown', () => {
+                this.checkAnswer(i);
+            });
+
+            this.answerTexts.push(answer);
+        }
+
+        this.showQuestion();
+    }
+
+    showQuestion() {
+
+        let q = this.questions[this.currentQuestion];
+
+        this.questionText.setText(
+            `Question ${this.currentQuestion + 1}/5\n\n${q.question}`
+        );
+
+        for (let i = 0; i < 3; i++) {
+            this.answerTexts[i].setText(q.answers[i]);
+        }
+    }
+
+    checkAnswer(choice) {
+
+        let q = this.questions[this.currentQuestion];
+
+        if (choice === q.correct) {
+
+            this.score += 20;
+
+            this.scoreText.setText(
+                'Score: ' + this.score
+            );
+
+        } else {
+
+            this.lives--;
+
+            this.livesText.setText(
+                'Lives: ' + this.lives
+            );
+
+            this.cameras.main.shake(200, 0.01);
+
+            if (this.lives <= 0) {
+
+                this.scene.start('GameOverScene');
+
+                return;
+            }
+        }
+
+        this.currentQuestion++;
+
+        if (this.currentQuestion >= this.questions.length) {
+
+            this.scene.start('RewardScene', {
+                score: this.score,
+                lives: this.lives
+            });
+
+        } else {
+
+            this.showQuestion();
+        }
+    }
+}
+
+class RewardScene extends Phaser.Scene {
+    constructor() {
+        super('RewardScene');
+    }
+
+    init(data) {
+        this.score = data.score;
+        this.lives = data.lives;
+    }
+
+    preload() {
+
+        // ADD YOUR ITEM IMAGE
+        this.load.image(
+            'artifact',
+            './sugbohenyo/games/assets/pre-colonial/gold.png'
+        );
+    }
+
+    create() {
+
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        this.add.rectangle(
+            256,
+            144,
+            512,
+            288,
+            0x000000
+        );
+
+        let glow = this.add.circle(
+            256,
+            120,
+            50,
+            0xffffff,
+            0.3
+        );
+
+        this.tweens.add({
+            targets: glow,
+            scale: 1.5,
+            alpha: 0.1,
+            duration: 1000,
+            yoyo: true,
+            repeat: -1
+        });
+
+        let item = this.add.image(
+            256,
+            120,
+            'artifact'
+        );
+
+        item.setScale(0);
+
+        this.tweens.add({
+            targets: item,
+            scale: 0.5,
+            duration: 1000,
+            ease: 'Back.out'
+        });
+
+        this.tweens.add({
+            targets: item,
+            angle: 5,
+            duration: 500,
+            yoyo: true,
+            repeat: -1
+        });
+
+        this.time.delayedCall(1200, () => {
+
+            this.add.text(
+                256,
+                190,
+                "You obtained:\nPearl of Sugbo",
+                {
+                    fontSize: '24px',
+                    fill: '#ffffff',
+                    align: 'center'
+                }
+            ).setOrigin(0.5);
+
+            this.add.text(
+                256,
+                235,
+                "A treasure symbolizing Cebu's\nthriving trade culture.",
+                {
+                    fontSize: '14px',
+                    fill: '#ffffaa',
+                    align: 'center'
+                }
+            ).setOrigin(0.5);
+
+            this.add.text(
+                256,
+                270,
+                "Press SPACE to continue",
+                {
+                    fontSize: '12px',
+                    fill: '#ffffff'
+                }
+            ).setOrigin(0.5);
+
+        });
+
+        this.input.keyboard.once('keydown-SPACE', () => {
+
+            this.scene.start('EndScene', {
+                score: this.score,
+                lives: this.lives
+            });
+
+        });
+    }
+}
+
 class EndScene extends Phaser.Scene {
     constructor() {
         super('EndScene');
@@ -710,7 +992,14 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [StoryScene, MainScene, EndScene, GameOverScene]
+    scene: [
+        StoryScene,
+        MainScene,
+        QuizScene,
+        RewardScene,
+        EndScene,
+        GameOverScene
+    ]
 };
 
 const game = new Phaser.Game(config);
