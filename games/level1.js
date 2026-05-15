@@ -216,6 +216,7 @@ class MainScene extends Phaser.Scene {
 
         if (this.entering) return; // prevents multiple triggers if the player overlaps the zone multiple times
         this.entering = true;
+        storeScore(this.score);
 
         player.setVelocity(0, 0); // (x, y) stops the player's movement immediately when they enter the house zone
         player.anims?.stop?.(); // stops any ongoing animations for the player sprite, ensuring it remains static during the transition
@@ -505,8 +506,7 @@ class MainScene extends Phaser.Scene {
         this.maxReachedX = this.player.x; // keeps track of the furthest horizontal position the player has reached, used to prevent the camera from moving back to areas the player has already passed
         this.prevCamX = 0;
         this.input.keyboard.on('keydown-ESC', () => {
-            storeScore();
-            window.location.href = '/adventure';
+            window.location.href = '/adventure'; 
         });
     }
 
@@ -644,7 +644,6 @@ class GameOverScene extends Phaser.Scene {
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            storeScore();
             window.location.href = '/adventure';
         });
     }
@@ -964,7 +963,6 @@ class EndScene extends Phaser.Scene {
             this.scene.start('StoryScene');
         });
         this.input.keyboard.on('keydown-ESC', () => {
-            storeScore();
             window.location.href = '/adventure';
         });
     }
