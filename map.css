@@ -305,6 +305,8 @@ select#citySelector:hover {
     width: 80%;
     height: 1px;
     background-color: #b5a47a; /* Matches the border color */
+}
+
 :root {
     --yt-red: #FF0000;
     --gold: #e8a020;
