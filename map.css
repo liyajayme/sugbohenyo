@@ -16,18 +16,6 @@ body {
     overflow: hidden;
 }
 
-/* --- SIDEBAR --- */
-#sidebar {
-    width: var(--sidebar-width);
-    height: 100vh;
-    background: #ffffff;
-    border-right: 1px solid #ddd;
-    flex-shrink: 0;
-    z-index: 100;
-    box-sizing: border-box;
-    overflow-y: auto;
-}
-
 /* --- MAP AREA --- */
 .map-wrapper {
     position: relative;
